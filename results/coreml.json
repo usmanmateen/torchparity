@@ -1,0 +1,3371 @@
+{
+ "backend": "coreml",
+ "label": "Core ML",
+ "mode": "torch.jit.trace + ct.convert; values from constant folding (no Core ML runtime)",
+ "versions": {
+  "torch": "2.14.1+cpu",
+  "coremltools": "9.0"
+ },
+ "torchparity": "0.1.0",
+ "platform": "Linux x86_64",
+ "python": "3.12.13",
+ "date": "2026-10-12",
+ "results": [
+  {
+   "op": "abs",
+   "dtype": "f32",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "f32",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "f32",
+   "expr": "torch.sign(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "nan"
+     },
+     "eager": "0.0",
+     "backend": "nan"
+    }
+   ]
+  },
+  {
+   "op": "relu",
+   "dtype": "f32",
+   "expr": "torch.relu(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "clamp",
+   "dtype": "f32",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "f32",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "inf"
+     },
+     "eager": "inf",
+     "backend": "3.40282347e+38"
+    }
+   ]
+  },
+  {
+   "op": "pow2",
+   "dtype": "f32",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "f32",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "f32",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "f32",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "f32",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "f32",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "f32",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "f32",
+   "expr": "x // 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "f32",
+   "expr": "torch.fmod(x, 3)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "f32",
+   "expr": "torch.remainder(x, -3)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "1e+10"
+     },
+     "eager": "-2.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-1e+10"
+     },
+     "eager": "-1.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "f32",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "f32",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "f32",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "f32",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: Unsupported fx node where, kind where.scalarother",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "f32",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "f32",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "f32",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "f32",
+   "expr": "torch.trunc(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'trunc' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "f32",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "f32",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "f32",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "f32",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "f32",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "f32",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "f32",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "f32",
+   "expr": "x.cumsum(0)",
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "3.54999924",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "amax",
+   "dtype": "f32",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "f32",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsqrt",
+   "dtype": "f32",
+   "expr": "torch.rsqrt(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0.0"
+     },
+     "eager": "inf",
+     "backend": "1000000.0"
+    },
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-inf",
+     "backend": "1000000.0"
+    },
+    {
+     "inputs": {
+      "x": "1e-30"
+     },
+     "eager": "9.99999987e+14",
+     "backend": "1000000.0"
+    }
+   ]
+  },
+  {
+   "op": "reciprocal",
+   "dtype": "f32",
+   "expr": "torch.reciprocal(x)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0.5"
+     },
+     "eager": "2.0",
+     "backend": "1.99960005"
+    },
+    {
+     "inputs": {
+      "x": "-0.5"
+     },
+     "eager": "-2.0",
+     "backend": "-2.00040007"
+    },
+    {
+     "inputs": {
+      "x": "1.5"
+     },
+     "eager": "0.666666687",
+     "backend": "0.666622221"
+    }
+   ]
+  },
+  {
+   "op": "log",
+   "dtype": "f32",
+   "expr": "torch.log(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0.0"
+     },
+     "eager": "-inf",
+     "backend": "-103.278931"
+    },
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-inf",
+     "backend": "-103.278931"
+    }
+   ]
+  },
+  {
+   "op": "log2",
+   "dtype": "f32",
+   "expr": "torch.log2(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0.0"
+     },
+     "eager": "-inf",
+     "backend": "-149.0"
+    },
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-inf",
+     "backend": "-149.0"
+    }
+   ]
+  },
+  {
+   "op": "log10",
+   "dtype": "f32",
+   "expr": "torch.log10(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0.0"
+     },
+     "eager": "-inf",
+     "backend": "-44.8534698"
+    },
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-inf",
+     "backend": "-44.8534698"
+    }
+   ]
+  },
+  {
+   "op": "log1p",
+   "dtype": "f32",
+   "expr": "torch.log1p(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "expm1",
+   "dtype": "f32",
+   "expr": "torch.expm1(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "sin",
+   "dtype": "f32",
+   "expr": "torch.sin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cos",
+   "dtype": "f32",
+   "expr": "torch.cos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tan",
+   "dtype": "f32",
+   "expr": "torch.tan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asin",
+   "dtype": "f32",
+   "expr": "torch.asin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acos",
+   "dtype": "f32",
+   "expr": "torch.acos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan",
+   "dtype": "f32",
+   "expr": "torch.atan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sinh",
+   "dtype": "f32",
+   "expr": "torch.sinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cosh",
+   "dtype": "f32",
+   "expr": "torch.cosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tanh",
+   "dtype": "f32",
+   "expr": "torch.tanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asinh",
+   "dtype": "f32",
+   "expr": "torch.asinh(x)",
+   "status": "unsupported",
+   "detail": "convert: AttributeError: type object 'Builder' has no attribute 'asinh'",
+   "examples": []
+  },
+  {
+   "op": "acosh",
+   "dtype": "f32",
+   "expr": "torch.acosh(x)",
+   "status": "unsupported",
+   "detail": "convert: AttributeError: type object 'Builder' has no attribute 'acosh'",
+   "examples": []
+  },
+  {
+   "op": "atanh",
+   "dtype": "f32",
+   "expr": "torch.atanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "erf",
+   "dtype": "f32",
+   "expr": "torch.erf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_half",
+   "dtype": "f32",
+   "expr": "torch.pow(x, 0.5)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_neg1",
+   "dtype": "f32",
+   "expr": "torch.pow(x, -1)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp2",
+   "dtype": "f32",
+   "expr": "torch.pow(2.0, x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu",
+   "dtype": "f32",
+   "expr": "F.gelu(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
+  },
+  {
+   "op": "gelu_tanh",
+   "dtype": "f32",
+   "expr": "F.gelu(x, approximate=\"tanh\")",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0.5"
+     },
+     "eager": "0.345714003",
+     "backend": "0.345731229"
+    },
+    {
+     "inputs": {
+      "x": "-0.5"
+     },
+     "eager": "-0.154285997",
+     "backend": "-0.154268771"
+    },
+    {
+     "inputs": {
+      "x": "1.5"
+     },
+     "eager": "1.39957154",
+     "backend": "1.39978921"
+    }
+   ]
+  },
+  {
+   "op": "elu",
+   "dtype": "f32",
+   "expr": "F.elu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardtanh",
+   "dtype": "f32",
+   "expr": "F.hardtanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "leaky_relu",
+   "dtype": "f32",
+   "expr": "F.leaky_relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softplus",
+   "dtype": "f32",
+   "expr": "F.softplus(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardsigmoid",
+   "dtype": "f32",
+   "expr": "F.hardsigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardswish",
+   "dtype": "f32",
+   "expr": "F.hardswish(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-3.70000005"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-1e+10"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "nan",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "silu",
+   "dtype": "f32",
+   "expr": "F.silu(x)",
+   "status": "skip",
+   "detail": "not constant-folded",
+   "examples": []
+  },
+  {
+   "op": "isnan",
+   "dtype": "f32",
+   "expr": "torch.isnan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isinf",
+   "dtype": "f32",
+   "expr": "torch.isinf(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'isinf' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "nan_to_num",
+   "dtype": "f32",
+   "expr": "torch.nan_to_num(x, nan=0.5, posinf=9.0, neginf=-9.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "masked_fill",
+   "dtype": "f32",
+   "expr": "x.masked_fill(x < 0, -7.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int32",
+   "dtype": "f32",
+   "expr": "x.to(torch.int32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int64",
+   "dtype": "f32",
+   "expr": "x.to(torch.int64)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "1e+10"
+     },
+     "eager": "10000000000",
+     "backend": "-2147483648"
+    },
+    {
+     "inputs": {
+      "x": "-1e+10"
+     },
+     "eager": "-10000000000",
+     "backend": "-2147483648"
+    }
+   ]
+  },
+  {
+   "op": "to_uint8",
+   "dtype": "f32",
+   "expr": "x.to(torch.uint8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean",
+   "dtype": "f32",
+   "expr": "x.mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amin",
+   "dtype": "f32",
+   "expr": "x.amin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "max",
+   "dtype": "f32",
+   "expr": "x.max()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmin",
+   "dtype": "f32",
+   "expr": "x.argmin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softmax",
+   "dtype": "f32",
+   "expr": "x.softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log_softmax",
+   "dtype": "f32",
+   "expr": "x.log_softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "var_mean",
+   "dtype": "f32",
+   "expr": "torch.var_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'var_mean' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "std_mean",
+   "dtype": "f32",
+   "expr": "torch.std_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'std_mean' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "f32",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "f32",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "f32",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "f32",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "f32",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "f32",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "f32",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "f32",
+   "expr": "torch.fmod(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "f32",
+   "expr": "torch.remainder(a, b)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.5",
+      "b": "0.75"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "a": "1e+10",
+      "b": "3.0"
+     },
+     "eager": "1.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "pow",
+   "dtype": "f32",
+   "expr": "torch.pow(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "f32",
+   "expr": "torch.atan2(a, b)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "-3.14159274",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "copysign",
+   "dtype": "f32",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'copysign' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "f32",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "f32",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "f32",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "f32",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "f32",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "f32",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "f32",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "f32",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "f32",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "f32",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "f32",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "f32",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_tensor",
+   "dtype": "f32",
+   "expr": "torch.clamp(a, min=b)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()",
+   "examples": []
+  },
+  {
+   "op": "lerp",
+   "dtype": "f32",
+   "expr": "torch.lerp(a, b, 0.25)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'lerp' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "xlogy",
+   "dtype": "f32",
+   "expr": "torch.xlogy(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'xlogy' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "f16",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "f16",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "f16",
+   "expr": "torch.sign(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "nan"
+     },
+     "eager": "0.0",
+     "backend": "nan"
+    }
+   ]
+  },
+  {
+   "op": "relu",
+   "dtype": "f16",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "f16",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "f16",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "pow2",
+   "dtype": "f16",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "f16",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "f16",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "f16",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "f16",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "f16",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "f16",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "f16",
+   "expr": "x // 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "f16",
+   "expr": "torch.fmod(x, 3)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "f16",
+   "expr": "torch.remainder(x, -3)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "f16",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "f16",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "f16",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "f16",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: Unsupported fx node where, kind where.scalarother",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "f16",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "f16",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "f16",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "f16",
+   "expr": "torch.trunc(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'trunc' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "f16",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "f16",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "f16",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "f16",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "f16",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "f16",
+   "expr": "x.to(torch.float32)",
+   "status": "wrong",
+   "detail": "dtype f16, eager gives f32",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "f16",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "f16",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "f16",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "f16",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsqrt",
+   "dtype": "f16",
+   "expr": "torch.rsqrt(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-inf",
+     "backend": "inf"
+    }
+   ]
+  },
+  {
+   "op": "reciprocal",
+   "dtype": "f16",
+   "expr": "torch.reciprocal(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0.0"
+     },
+     "eager": "inf",
+     "backend": "10000.0"
+    },
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-inf",
+     "backend": "10000.0"
+    },
+    {
+     "inputs": {
+      "x": "0.0"
+     },
+     "eager": "inf",
+     "backend": "10000.0"
+    }
+   ]
+  },
+  {
+   "op": "log",
+   "dtype": "f16",
+   "expr": "torch.log(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log2",
+   "dtype": "f16",
+   "expr": "torch.log2(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: In op, of type mul, named mul_0, the named input `y` must have the same data type as the named input `x`. However, y has dtype fp32 whereas x has dtype fp16.",
+   "examples": []
+  },
+  {
+   "op": "log10",
+   "dtype": "f16",
+   "expr": "torch.log10(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: In op, of type mul, named mul_0, the named input `y` must have the same data type as the named input `x`. However, y has dtype fp32 whereas x has dtype fp16.",
+   "examples": []
+  },
+  {
+   "op": "log1p",
+   "dtype": "f16",
+   "expr": "torch.log1p(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "expm1",
+   "dtype": "f16",
+   "expr": "torch.expm1(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: In op, of type sub, named expm1, the named input `y` must have the same data type as the named input `x`. However, y has dtype fp32 whereas x has dtype fp16.",
+   "examples": []
+  },
+  {
+   "op": "sin",
+   "dtype": "f16",
+   "expr": "torch.sin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cos",
+   "dtype": "f16",
+   "expr": "torch.cos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tan",
+   "dtype": "f16",
+   "expr": "torch.tan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asin",
+   "dtype": "f16",
+   "expr": "torch.asin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acos",
+   "dtype": "f16",
+   "expr": "torch.acos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan",
+   "dtype": "f16",
+   "expr": "torch.atan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sinh",
+   "dtype": "f16",
+   "expr": "torch.sinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cosh",
+   "dtype": "f16",
+   "expr": "torch.cosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tanh",
+   "dtype": "f16",
+   "expr": "torch.tanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asinh",
+   "dtype": "f16",
+   "expr": "torch.asinh(x)",
+   "status": "unsupported",
+   "detail": "convert: AttributeError: type object 'Builder' has no attribute 'asinh'",
+   "examples": []
+  },
+  {
+   "op": "acosh",
+   "dtype": "f16",
+   "expr": "torch.acosh(x)",
+   "status": "unsupported",
+   "detail": "convert: AttributeError: type object 'Builder' has no attribute 'acosh'",
+   "examples": []
+  },
+  {
+   "op": "atanh",
+   "dtype": "f16",
+   "expr": "torch.atanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "erf",
+   "dtype": "f16",
+   "expr": "torch.erf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_half",
+   "dtype": "f16",
+   "expr": "torch.pow(x, 0.5)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "inf",
+     "backend": "nan"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "inf",
+     "backend": "nan"
+    }
+   ]
+  },
+  {
+   "op": "pow_neg1",
+   "dtype": "f16",
+   "expr": "torch.pow(x, -1)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp2",
+   "dtype": "f16",
+   "expr": "torch.pow(2.0, x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu",
+   "dtype": "f16",
+   "expr": "F.gelu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu_tanh",
+   "dtype": "f16",
+   "expr": "F.gelu(x, approximate=\"tanh\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "elu",
+   "dtype": "f16",
+   "expr": "F.elu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardtanh",
+   "dtype": "f16",
+   "expr": "F.hardtanh(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: In op, of type clip, named hardtanh, the named input `alpha` must have the same data type as the named input `x`. However, alpha has dtype fp32 whereas x has dtype fp16.",
+   "examples": []
+  },
+  {
+   "op": "leaky_relu",
+   "dtype": "f16",
+   "expr": "F.leaky_relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softplus",
+   "dtype": "f16",
+   "expr": "F.softplus(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardsigmoid",
+   "dtype": "f16",
+   "expr": "F.hardsigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardswish",
+   "dtype": "f16",
+   "expr": "F.hardswish(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-3.6992"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "nan",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "nan",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "silu",
+   "dtype": "f16",
+   "expr": "F.silu(x)",
+   "status": "skip",
+   "detail": "not constant-folded",
+   "examples": []
+  },
+  {
+   "op": "isnan",
+   "dtype": "f16",
+   "expr": "torch.isnan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isinf",
+   "dtype": "f16",
+   "expr": "torch.isinf(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'isinf' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "nan_to_num",
+   "dtype": "f16",
+   "expr": "torch.nan_to_num(x, nan=0.5, posinf=9.0, neginf=-9.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "masked_fill",
+   "dtype": "f16",
+   "expr": "x.masked_fill(x < 0, -7.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int32",
+   "dtype": "f16",
+   "expr": "x.to(torch.int32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int64",
+   "dtype": "f16",
+   "expr": "x.to(torch.int64)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_uint8",
+   "dtype": "f16",
+   "expr": "x.to(torch.uint8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean",
+   "dtype": "f16",
+   "expr": "x.mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amin",
+   "dtype": "f16",
+   "expr": "x.amin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "max",
+   "dtype": "f16",
+   "expr": "x.max()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmin",
+   "dtype": "f16",
+   "expr": "x.argmin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softmax",
+   "dtype": "f16",
+   "expr": "x.softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log_softmax",
+   "dtype": "f16",
+   "expr": "x.log_softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "var_mean",
+   "dtype": "f16",
+   "expr": "torch.var_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'var_mean' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "std_mean",
+   "dtype": "f16",
+   "expr": "torch.std_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'std_mean' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "f16",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "f16",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "f16",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "f16",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "f16",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "f16",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "f16",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "f16",
+   "expr": "torch.fmod(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "f16",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-4.1992",
+      "b": "1.4004"
+     },
+     "eager": "0.0019531",
+     "backend": "0.0039062"
+    }
+   ]
+  },
+  {
+   "op": "pow",
+   "dtype": "f16",
+   "expr": "torch.pow(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "f16",
+   "expr": "torch.atan2(a, b)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: In op, of type less, named less_0, the named input `y` must have the same data type as the named input `x`. However, y has dtype fp32 whereas x has dtype fp16.",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "f16",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'copysign' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "f16",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "f16",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "f16",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "f16",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "f16",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "f16",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "f16",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "f16",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "f16",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "f16",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "f16",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "f16",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_tensor",
+   "dtype": "f16",
+   "expr": "torch.clamp(a, min=b)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()",
+   "examples": []
+  },
+  {
+   "op": "lerp",
+   "dtype": "f16",
+   "expr": "torch.lerp(a, b, 0.25)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'lerp' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "xlogy",
+   "dtype": "f16",
+   "expr": "torch.xlogy(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'xlogy' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "i64",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "i64",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "i64",
+   "expr": "torch.sign(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "relu",
+   "dtype": "i64",
+   "expr": "torch.relu(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: relu) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "i64",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "i64",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "i64",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "i64",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "i64",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "i64",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "i64",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "i64",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "i64",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "i64",
+   "expr": "x // 3",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "i64",
+   "expr": "torch.fmod(x, 3)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "i64",
+   "expr": "torch.remainder(x, -3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "i64",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "i64",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "i64",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "i64",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: Unsupported fx node where, kind where.scalarother",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "i64",
+   "expr": "torch.floor(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: floor) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "i64",
+   "expr": "torch.ceil(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: ceil) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "i64",
+   "expr": "torch.round(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: round) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "i64",
+   "expr": "torch.trunc(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'trunc' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "i64",
+   "expr": "torch.sqrt(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: sqrt) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "i64",
+   "expr": "torch.exp(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: exp) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "i64",
+   "expr": "torch.sigmoid(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: sigmoid) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "i64",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "i64",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "i64",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "i64",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "i64",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "i64",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "i64",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_not",
+   "dtype": "i64",
+   "expr": "torch.bitwise_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left_scalar",
+   "dtype": "i64",
+   "expr": "torch.bitwise_left_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_left_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "shift_right_scalar",
+   "dtype": "i64",
+   "expr": "torch.bitwise_right_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_right_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "to_int8",
+   "dtype": "i64",
+   "expr": "x.to(torch.int8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "prod",
+   "dtype": "i64",
+   "expr": "x[:4].prod()",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'prod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "mean_float",
+   "dtype": "i64",
+   "expr": "x.float().mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "i64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "i64",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "i64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "i64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "i64",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "i64",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "i64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "i64",
+   "expr": "torch.fmod(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "i64",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow",
+   "dtype": "i64",
+   "expr": "torch.pow(a, b.abs())",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "i64",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "i64",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'copysign' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "i64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "i64",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "i64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "i64",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "i64",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "i64",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "i64",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "i64",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "i64",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "i64",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "i64",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "i64",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_and",
+   "dtype": "i64",
+   "expr": "torch.bitwise_and(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: The `bitwise_and` op only supports boolean input, but get [<class 'coremltools.converters.mil.mil.types.type_int.make_int.<locals>.int'>, <class 'coremltools.converters.mil.mil.ty",
+   "examples": []
+  },
+  {
+   "op": "bitwise_or",
+   "dtype": "i64",
+   "expr": "torch.bitwise_or(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_or' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "bitwise_xor",
+   "dtype": "i64",
+   "expr": "torch.bitwise_xor(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_xor' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "shift_left",
+   "dtype": "i64",
+   "expr": "torch.bitwise_left_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_left_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "shift_right",
+   "dtype": "i64",
+   "expr": "torch.bitwise_right_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_right_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "i32",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "i32",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "i32",
+   "expr": "torch.sign(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "relu",
+   "dtype": "i32",
+   "expr": "torch.relu(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: relu) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "i32",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "i32",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i32",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "i32",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "i32",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "i32",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "i32",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "i32",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "i32",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i32",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "i32",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i32",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "i32",
+   "expr": "x // 3",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i32",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "i32",
+   "expr": "torch.fmod(x, 3)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "i32",
+   "expr": "torch.remainder(x, -3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "i32",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "i32",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "i32",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "i32",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: Unsupported fx node where, kind where.scalarother",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "i32",
+   "expr": "torch.floor(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: floor) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "i32",
+   "expr": "torch.ceil(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: ceil) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "i32",
+   "expr": "torch.round(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: round) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "i32",
+   "expr": "torch.trunc(x)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'trunc' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "i32",
+   "expr": "torch.sqrt(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: sqrt) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "i32",
+   "expr": "torch.exp(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: exp) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "i32",
+   "expr": "torch.sigmoid(x)",
+   "status": "unsupported",
+   "detail": "convert: ValueError: Op \"2\" (op_type: sigmoid) Input x=\"x0\" expects tensor or scalar of dtype from type domain ['fp16', 'fp32'] but got tensor[16,int32]",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "i32",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "i32",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "i32",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "i32",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "i32",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "i32",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "i32",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_not",
+   "dtype": "i32",
+   "expr": "torch.bitwise_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left_scalar",
+   "dtype": "i32",
+   "expr": "torch.bitwise_left_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_left_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "shift_right_scalar",
+   "dtype": "i32",
+   "expr": "torch.bitwise_right_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_right_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "to_int8",
+   "dtype": "i32",
+   "expr": "x.to(torch.int8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "prod",
+   "dtype": "i32",
+   "expr": "x[:4].prod()",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'prod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "mean_float",
+   "dtype": "i32",
+   "expr": "x.float().mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "i32",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "i32",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "i32",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "i32",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "i32",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i32",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "i32",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i32",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "i32",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i32",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "i32",
+   "expr": "torch.fmod(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'fmod' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "i32",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow",
+   "dtype": "i32",
+   "expr": "torch.pow(a, b.abs())",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "i32",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "i32",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'copysign' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "i32",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "i32",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "i32",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "i32",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "i32",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "i32",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "i32",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "i32",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "i32",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "i32",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "i32",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "i32",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_and",
+   "dtype": "i32",
+   "expr": "torch.bitwise_and(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: The `bitwise_and` op only supports boolean input, but get [<class 'coremltools.converters.mil.mil.types.type_int.make_int.<locals>.int'>, <class 'coremltools.converters.mil.mil.ty",
+   "examples": []
+  },
+  {
+   "op": "bitwise_or",
+   "dtype": "i32",
+   "expr": "torch.bitwise_or(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_or' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "bitwise_xor",
+   "dtype": "i32",
+   "expr": "torch.bitwise_xor(a, b)",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_xor' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "shift_left",
+   "dtype": "i32",
+   "expr": "torch.bitwise_left_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_left_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "shift_right",
+   "dtype": "i32",
+   "expr": "torch.bitwise_right_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: NotImplementedError: PyTorch convert function for op 'bitwise_right_shift' not implemented.",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "f32+i64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "f32+i64",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "f32+i64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "f32+i64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "f32+i64",
+   "expr": "torch.remainder(a, b)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "3"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1e+10",
+      "b": "5"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "f32+i64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "f32+i64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "f32+i64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "bool+i64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "bool+i64",
+   "expr": "torch.sub(a, b)",
+   "status": "skip",
+   "detail": "eager: NotImplementedError: Subtraction, the `-` operator, with a bool tensor is not supported. If you are trying to invert a mask, use the `~` or `logical_not()` operator instead.",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "bool+i64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "bool+i64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "bool+i64",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "bool+i64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "wrong",
+   "detail": "dtype f32, eager gives i64",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "bool+i64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "bool+i64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  }
+ ]
+}

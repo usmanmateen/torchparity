@@ -1,0 +1,6692 @@
+{
+ "backend": "executorch",
+ "label": "ExecuTorch",
+ "mode": "to_edge(torch.export.export(...)).to_executorch(), default CPU kernels",
+ "versions": {
+  "torch": "2.14.1+cpu",
+  "executorch": "1.5.1+cpu"
+ },
+ "torchparity": "0.1.0",
+ "platform": "Linux x86_64",
+ "python": "3.12.13",
+ "date": "2026-10-12",
+ "results": [
+  {
+   "op": "abs",
+   "dtype": "f32",
+   "expr": "torch.abs(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "neg",
+   "dtype": "f32",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "f32",
+   "expr": "torch.sign(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "nan"
+     },
+     "eager": "0.0",
+     "backend": "nan"
+    }
+   ]
+  },
+  {
+   "op": "relu",
+   "dtype": "f32",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "f32",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "f32",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "pow2",
+   "dtype": "f32",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "f32",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "f32",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "f32",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "f32",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "f32",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "f32",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "f32",
+   "expr": "x // 3",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "f32",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "f32",
+   "expr": "torch.remainder(x, -3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "f32",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "f32",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "f32",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "f32",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "f32",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "f32",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "f32",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "f32",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "f32",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "f32",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "f32",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "f32",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "f32",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "f32",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "f32",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "f32",
+   "expr": "x.cumsum(0)",
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "3.54999924",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "amax",
+   "dtype": "f32",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "f32",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsqrt",
+   "dtype": "f32",
+   "expr": "torch.rsqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "reciprocal",
+   "dtype": "f32",
+   "expr": "torch.reciprocal(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log",
+   "dtype": "f32",
+   "expr": "torch.log(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log2",
+   "dtype": "f32",
+   "expr": "torch.log2(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log10",
+   "dtype": "f32",
+   "expr": "torch.log10(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log1p",
+   "dtype": "f32",
+   "expr": "torch.log1p(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "expm1",
+   "dtype": "f32",
+   "expr": "torch.expm1(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sin",
+   "dtype": "f32",
+   "expr": "torch.sin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cos",
+   "dtype": "f32",
+   "expr": "torch.cos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tan",
+   "dtype": "f32",
+   "expr": "torch.tan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asin",
+   "dtype": "f32",
+   "expr": "torch.asin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acos",
+   "dtype": "f32",
+   "expr": "torch.acos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan",
+   "dtype": "f32",
+   "expr": "torch.atan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sinh",
+   "dtype": "f32",
+   "expr": "torch.sinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cosh",
+   "dtype": "f32",
+   "expr": "torch.cosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tanh",
+   "dtype": "f32",
+   "expr": "torch.tanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asinh",
+   "dtype": "f32",
+   "expr": "torch.asinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acosh",
+   "dtype": "f32",
+   "expr": "torch.acosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atanh",
+   "dtype": "f32",
+   "expr": "torch.atanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "erf",
+   "dtype": "f32",
+   "expr": "torch.erf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_half",
+   "dtype": "f32",
+   "expr": "torch.pow(x, 0.5)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
+  },
+  {
+   "op": "pow_neg1",
+   "dtype": "f32",
+   "expr": "torch.pow(x, -1)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp2",
+   "dtype": "f32",
+   "expr": "torch.pow(2.0, x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu",
+   "dtype": "f32",
+   "expr": "F.gelu(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
+  },
+  {
+   "op": "gelu_tanh",
+   "dtype": "f32",
+   "expr": "F.gelu(x, approximate=\"tanh\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "elu",
+   "dtype": "f32",
+   "expr": "F.elu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardtanh",
+   "dtype": "f32",
+   "expr": "F.hardtanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "leaky_relu",
+   "dtype": "f32",
+   "expr": "F.leaky_relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softplus",
+   "dtype": "f32",
+   "expr": "F.softplus(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardsigmoid",
+   "dtype": "f32",
+   "expr": "F.hardsigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardswish",
+   "dtype": "f32",
+   "expr": "F.hardswish(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "silu",
+   "dtype": "f32",
+   "expr": "F.silu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isnan",
+   "dtype": "f32",
+   "expr": "torch.isnan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isinf",
+   "dtype": "f32",
+   "expr": "torch.isinf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "nan_to_num",
+   "dtype": "f32",
+   "expr": "torch.nan_to_num(x, nan=0.5, posinf=9.0, neginf=-9.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "masked_fill",
+   "dtype": "f32",
+   "expr": "x.masked_fill(x < 0, -7.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int32",
+   "dtype": "f32",
+   "expr": "x.to(torch.int32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int64",
+   "dtype": "f32",
+   "expr": "x.to(torch.int64)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_uint8",
+   "dtype": "f32",
+   "expr": "x.to(torch.uint8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean",
+   "dtype": "f32",
+   "expr": "x.mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amin",
+   "dtype": "f32",
+   "expr": "x.amin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "max",
+   "dtype": "f32",
+   "expr": "x.max()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmin",
+   "dtype": "f32",
+   "expr": "x.argmin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softmax",
+   "dtype": "f32",
+   "expr": "x.softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log_softmax",
+   "dtype": "f32",
+   "expr": "x.log_softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "var_mean",
+   "dtype": "f32",
+   "expr": "torch.var_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "std_mean",
+   "dtype": "f32",
+   "expr": "torch.std_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "f32",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "f32",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "f32",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "f32",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "f32",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-0.5",
+      "b": "-2.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.0",
+      "b": "-inf"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "f32",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "f32",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-0.5",
+      "b": "-2.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.0",
+      "b": "-inf"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "fmod",
+   "dtype": "f32",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "f32",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow",
+   "dtype": "f32",
+   "expr": "torch.pow(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "f32",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "f32",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "f32",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "f32",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "f32",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "f32",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "f32",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "f32",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "f32",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "f32",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "f32",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "f32",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "f32",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "f32",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_tensor",
+   "dtype": "f32",
+   "expr": "torch.clamp(a, min=b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lerp",
+   "dtype": "f32",
+   "expr": "torch.lerp(a, b, 0.25)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "xlogy",
+   "dtype": "f32",
+   "expr": "torch.xlogy(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "f64",
+   "expr": "torch.abs(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "neg",
+   "dtype": "f64",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "f64",
+   "expr": "torch.sign(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "nan"
+     },
+     "eager": "0.0",
+     "backend": "nan"
+    }
+   ]
+  },
+  {
+   "op": "relu",
+   "dtype": "f64",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "f64",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "f64",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "pow2",
+   "dtype": "f64",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "f64",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "f64",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "f64",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "f64",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "f64",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "f64",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "f64",
+   "expr": "x // 3",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "f64",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "f64",
+   "expr": "torch.remainder(x, -3)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-3.7000000000000002"
+     },
+     "eager": "-0.70000000000000018",
+     "backend": "-0.69999998807907104"
+    },
+    {
+     "inputs": {
+      "x": "4.2000000000000002"
+     },
+     "eager": "-1.7999999999999998",
+     "backend": "-1.7999999523162842"
+    },
+    {
+     "inputs": {
+      "x": "0.69999999999999996"
+     },
+     "eager": "-2.2999999999999998",
+     "backend": "-2.2999999523162842"
+    }
+   ]
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "f64",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "f64",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "f64",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "f64",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "f64",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "f64",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "f64",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "f64",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "f64",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "f64",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "f64",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "f64",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "f64",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "f64",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "f64",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "f64",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "f64",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "f64",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsqrt",
+   "dtype": "f64",
+   "expr": "torch.rsqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "reciprocal",
+   "dtype": "f64",
+   "expr": "torch.reciprocal(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log",
+   "dtype": "f64",
+   "expr": "torch.log(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log2",
+   "dtype": "f64",
+   "expr": "torch.log2(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log10",
+   "dtype": "f64",
+   "expr": "torch.log10(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log1p",
+   "dtype": "f64",
+   "expr": "torch.log1p(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "expm1",
+   "dtype": "f64",
+   "expr": "torch.expm1(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sin",
+   "dtype": "f64",
+   "expr": "torch.sin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cos",
+   "dtype": "f64",
+   "expr": "torch.cos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tan",
+   "dtype": "f64",
+   "expr": "torch.tan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asin",
+   "dtype": "f64",
+   "expr": "torch.asin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acos",
+   "dtype": "f64",
+   "expr": "torch.acos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan",
+   "dtype": "f64",
+   "expr": "torch.atan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sinh",
+   "dtype": "f64",
+   "expr": "torch.sinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cosh",
+   "dtype": "f64",
+   "expr": "torch.cosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tanh",
+   "dtype": "f64",
+   "expr": "torch.tanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asinh",
+   "dtype": "f64",
+   "expr": "torch.asinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acosh",
+   "dtype": "f64",
+   "expr": "torch.acosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atanh",
+   "dtype": "f64",
+   "expr": "torch.atanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "erf",
+   "dtype": "f64",
+   "expr": "torch.erf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_half",
+   "dtype": "f64",
+   "expr": "torch.pow(x, 0.5)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
+  },
+  {
+   "op": "pow_neg1",
+   "dtype": "f64",
+   "expr": "torch.pow(x, -1)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp2",
+   "dtype": "f64",
+   "expr": "torch.pow(2.0, x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu",
+   "dtype": "f64",
+   "expr": "F.gelu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu_tanh",
+   "dtype": "f64",
+   "expr": "F.gelu(x, approximate=\"tanh\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "elu",
+   "dtype": "f64",
+   "expr": "F.elu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardtanh",
+   "dtype": "f64",
+   "expr": "F.hardtanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "leaky_relu",
+   "dtype": "f64",
+   "expr": "F.leaky_relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softplus",
+   "dtype": "f64",
+   "expr": "F.softplus(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardsigmoid",
+   "dtype": "f64",
+   "expr": "F.hardsigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardswish",
+   "dtype": "f64",
+   "expr": "F.hardswish(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "silu",
+   "dtype": "f64",
+   "expr": "F.silu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isnan",
+   "dtype": "f64",
+   "expr": "torch.isnan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isinf",
+   "dtype": "f64",
+   "expr": "torch.isinf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "nan_to_num",
+   "dtype": "f64",
+   "expr": "torch.nan_to_num(x, nan=0.5, posinf=9.0, neginf=-9.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "masked_fill",
+   "dtype": "f64",
+   "expr": "x.masked_fill(x < 0, -7.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int32",
+   "dtype": "f64",
+   "expr": "x.to(torch.int32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int64",
+   "dtype": "f64",
+   "expr": "x.to(torch.int64)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_uint8",
+   "dtype": "f64",
+   "expr": "x.to(torch.uint8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean",
+   "dtype": "f64",
+   "expr": "x.mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amin",
+   "dtype": "f64",
+   "expr": "x.amin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "max",
+   "dtype": "f64",
+   "expr": "x.max()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmin",
+   "dtype": "f64",
+   "expr": "x.argmin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softmax",
+   "dtype": "f64",
+   "expr": "x.softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log_softmax",
+   "dtype": "f64",
+   "expr": "x.log_softmax(0)",
+   "status": "unsupported",
+   "detail": "run: RuntimeError: method->execute() failed with error 0x12",
+   "examples": []
+  },
+  {
+   "op": "var_mean",
+   "dtype": "f64",
+   "expr": "torch.var_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "std_mean",
+   "dtype": "f64",
+   "expr": "torch.std_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "f64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "f64",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "f64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "f64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "f64",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "4.2000000000000002",
+      "b": "1.3999999999999999"
+     },
+     "eager": "3.0",
+     "backend": "2.9999999999999996"
+    },
+    {
+     "inputs": {
+      "a": "0.69999999999999996",
+      "b": "0.10000000000000001"
+     },
+     "eager": "6.0",
+     "backend": "6.0000000000000009"
+    },
+    {
+     "inputs": {
+      "a": "-4.2000000000000002",
+      "b": "1.3999999999999999"
+     },
+     "eager": "-4.0",
+     "backend": "-3.9999999999999996"
+    }
+   ]
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "f64",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "f64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "4.2000000000000002",
+      "b": "1.3999999999999999"
+     },
+     "eager": "3.0",
+     "backend": "2.9999999999999996"
+    },
+    {
+     "inputs": {
+      "a": "0.69999999999999996",
+      "b": "0.10000000000000001"
+     },
+     "eager": "6.0",
+     "backend": "6.0000000000000009"
+    },
+    {
+     "inputs": {
+      "a": "-4.2000000000000002",
+      "b": "1.3999999999999999"
+     },
+     "eager": "-4.0",
+     "backend": "-3.9999999999999996"
+    }
+   ]
+  },
+  {
+   "op": "fmod",
+   "dtype": "f64",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "f64",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-3.7000000000000002",
+      "b": "2.0"
+     },
+     "eager": "0.29999999999999982",
+     "backend": "0.29999995231628418"
+    },
+    {
+     "inputs": {
+      "a": "0.69999999999999996",
+      "b": "0.10000000000000001"
+     },
+     "eager": "0.099999999999999922",
+     "backend": "0.10000000149011612"
+    },
+    {
+     "inputs": {
+      "a": "-4.2000000000000002",
+      "b": "1.3999999999999999"
+     },
+     "eager": "1.3999999999999995",
+     "backend": "1.3999999761581421"
+    }
+   ]
+  },
+  {
+   "op": "pow",
+   "dtype": "f64",
+   "expr": "torch.pow(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "f64",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "f64",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "f64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "f64",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "f64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "f64",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "f64",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "f64",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "f64",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "f64",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "f64",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "f64",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "f64",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "f64",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_tensor",
+   "dtype": "f64",
+   "expr": "torch.clamp(a, min=b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lerp",
+   "dtype": "f64",
+   "expr": "torch.lerp(a, b, 0.25)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "xlogy",
+   "dtype": "f64",
+   "expr": "torch.xlogy(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "f16",
+   "expr": "torch.abs(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "neg",
+   "dtype": "f16",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "f16",
+   "expr": "torch.sign(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "nan"
+     },
+     "eager": "0.0",
+     "backend": "nan"
+    }
+   ]
+  },
+  {
+   "op": "relu",
+   "dtype": "f16",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "f16",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "f16",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "f16",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "f16",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "f16",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "f16",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "f16",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "f16",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "f16",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "f16",
+   "expr": "x // 3",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "f16",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "f16",
+   "expr": "torch.remainder(x, -3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "f16",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "f16",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "f16",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "f16",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "f16",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "f16",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "f16",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "f16",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "f16",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "f16",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "f16",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "f16",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "f16",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "f16",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "f16",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "f16",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "f16",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "f16",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsqrt",
+   "dtype": "f16",
+   "expr": "torch.rsqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "reciprocal",
+   "dtype": "f16",
+   "expr": "torch.reciprocal(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log",
+   "dtype": "f16",
+   "expr": "torch.log(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log2",
+   "dtype": "f16",
+   "expr": "torch.log2(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log10",
+   "dtype": "f16",
+   "expr": "torch.log10(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log1p",
+   "dtype": "f16",
+   "expr": "torch.log1p(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "expm1",
+   "dtype": "f16",
+   "expr": "torch.expm1(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sin",
+   "dtype": "f16",
+   "expr": "torch.sin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cos",
+   "dtype": "f16",
+   "expr": "torch.cos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tan",
+   "dtype": "f16",
+   "expr": "torch.tan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asin",
+   "dtype": "f16",
+   "expr": "torch.asin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acos",
+   "dtype": "f16",
+   "expr": "torch.acos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan",
+   "dtype": "f16",
+   "expr": "torch.atan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sinh",
+   "dtype": "f16",
+   "expr": "torch.sinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cosh",
+   "dtype": "f16",
+   "expr": "torch.cosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tanh",
+   "dtype": "f16",
+   "expr": "torch.tanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asinh",
+   "dtype": "f16",
+   "expr": "torch.asinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acosh",
+   "dtype": "f16",
+   "expr": "torch.acosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atanh",
+   "dtype": "f16",
+   "expr": "torch.atanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "erf",
+   "dtype": "f16",
+   "expr": "torch.erf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_half",
+   "dtype": "f16",
+   "expr": "torch.pow(x, 0.5)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_neg1",
+   "dtype": "f16",
+   "expr": "torch.pow(x, -1)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp2",
+   "dtype": "f16",
+   "expr": "torch.pow(2.0, x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu",
+   "dtype": "f16",
+   "expr": "F.gelu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu_tanh",
+   "dtype": "f16",
+   "expr": "F.gelu(x, approximate=\"tanh\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "elu",
+   "dtype": "f16",
+   "expr": "F.elu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardtanh",
+   "dtype": "f16",
+   "expr": "F.hardtanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "leaky_relu",
+   "dtype": "f16",
+   "expr": "F.leaky_relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softplus",
+   "dtype": "f16",
+   "expr": "F.softplus(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardsigmoid",
+   "dtype": "f16",
+   "expr": "F.hardsigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardswish",
+   "dtype": "f16",
+   "expr": "F.hardswish(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "silu",
+   "dtype": "f16",
+   "expr": "F.silu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isnan",
+   "dtype": "f16",
+   "expr": "torch.isnan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isinf",
+   "dtype": "f16",
+   "expr": "torch.isinf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "nan_to_num",
+   "dtype": "f16",
+   "expr": "torch.nan_to_num(x, nan=0.5, posinf=9.0, neginf=-9.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "masked_fill",
+   "dtype": "f16",
+   "expr": "x.masked_fill(x < 0, -7.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int32",
+   "dtype": "f16",
+   "expr": "x.to(torch.int32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int64",
+   "dtype": "f16",
+   "expr": "x.to(torch.int64)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_uint8",
+   "dtype": "f16",
+   "expr": "x.to(torch.uint8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean",
+   "dtype": "f16",
+   "expr": "x.mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amin",
+   "dtype": "f16",
+   "expr": "x.amin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "max",
+   "dtype": "f16",
+   "expr": "x.max()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmin",
+   "dtype": "f16",
+   "expr": "x.argmin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softmax",
+   "dtype": "f16",
+   "expr": "x.softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log_softmax",
+   "dtype": "f16",
+   "expr": "x.log_softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "var_mean",
+   "dtype": "f16",
+   "expr": "torch.var_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "std_mean",
+   "dtype": "f16",
+   "expr": "torch.std_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "f16",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "f16",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "f16",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "f16",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "f16",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-0.5",
+      "b": "-2.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.0",
+      "b": "-inf"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "f16",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "f16",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-0.5",
+      "b": "-2.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.0",
+      "b": "-inf"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "fmod",
+   "dtype": "f16",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "f16",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow",
+   "dtype": "f16",
+   "expr": "torch.pow(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "f16",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "f16",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "f16",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "f16",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "f16",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "f16",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "f16",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "f16",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "f16",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "f16",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "f16",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "f16",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "f16",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "f16",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_tensor",
+   "dtype": "f16",
+   "expr": "torch.clamp(a, min=b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lerp",
+   "dtype": "f16",
+   "expr": "torch.lerp(a, b, 0.25)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "xlogy",
+   "dtype": "f16",
+   "expr": "torch.xlogy(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "bf16",
+   "expr": "torch.abs(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "neg",
+   "dtype": "bf16",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "bf16",
+   "expr": "torch.sign(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "nan"
+     },
+     "eager": "0.0",
+     "backend": "nan"
+    }
+   ]
+  },
+  {
+   "op": "relu",
+   "dtype": "bf16",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "bf16",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "bf16",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "bf16",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "bf16",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "bf16",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "bf16",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "bf16",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "bf16",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "bf16",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "bf16",
+   "expr": "x // 3",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    }
+   ]
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "bf16",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "bf16",
+   "expr": "torch.remainder(x, -3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "bf16",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "bf16",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "bf16",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "bf16",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "bf16",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "bf16",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "bf16",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "bf16",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "bf16",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "bf16",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "bf16",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "bf16",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "bf16",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "bf16",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "bf16",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "bf16",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "bf16",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "bf16",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsqrt",
+   "dtype": "bf16",
+   "expr": "torch.rsqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "reciprocal",
+   "dtype": "bf16",
+   "expr": "torch.reciprocal(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log",
+   "dtype": "bf16",
+   "expr": "torch.log(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log2",
+   "dtype": "bf16",
+   "expr": "torch.log2(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log10",
+   "dtype": "bf16",
+   "expr": "torch.log10(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log1p",
+   "dtype": "bf16",
+   "expr": "torch.log1p(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "expm1",
+   "dtype": "bf16",
+   "expr": "torch.expm1(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sin",
+   "dtype": "bf16",
+   "expr": "torch.sin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cos",
+   "dtype": "bf16",
+   "expr": "torch.cos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tan",
+   "dtype": "bf16",
+   "expr": "torch.tan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asin",
+   "dtype": "bf16",
+   "expr": "torch.asin(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acos",
+   "dtype": "bf16",
+   "expr": "torch.acos(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan",
+   "dtype": "bf16",
+   "expr": "torch.atan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sinh",
+   "dtype": "bf16",
+   "expr": "torch.sinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cosh",
+   "dtype": "bf16",
+   "expr": "torch.cosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "tanh",
+   "dtype": "bf16",
+   "expr": "torch.tanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "asinh",
+   "dtype": "bf16",
+   "expr": "torch.asinh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "acosh",
+   "dtype": "bf16",
+   "expr": "torch.acosh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atanh",
+   "dtype": "bf16",
+   "expr": "torch.atanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "erf",
+   "dtype": "bf16",
+   "expr": "torch.erf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow_half",
+   "dtype": "bf16",
+   "expr": "torch.pow(x, 0.5)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "-0.0"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "x": "-inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
+  },
+  {
+   "op": "pow_neg1",
+   "dtype": "bf16",
+   "expr": "torch.pow(x, -1)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp2",
+   "dtype": "bf16",
+   "expr": "torch.pow(2.0, x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gelu",
+   "dtype": "bf16",
+   "expr": "F.gelu(x)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
+  },
+  {
+   "op": "gelu_tanh",
+   "dtype": "bf16",
+   "expr": "F.gelu(x, approximate=\"tanh\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "elu",
+   "dtype": "bf16",
+   "expr": "F.elu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardtanh",
+   "dtype": "bf16",
+   "expr": "F.hardtanh(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "leaky_relu",
+   "dtype": "bf16",
+   "expr": "F.leaky_relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softplus",
+   "dtype": "bf16",
+   "expr": "F.softplus(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardsigmoid",
+   "dtype": "bf16",
+   "expr": "F.hardsigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "hardswish",
+   "dtype": "bf16",
+   "expr": "F.hardswish(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "silu",
+   "dtype": "bf16",
+   "expr": "F.silu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isnan",
+   "dtype": "bf16",
+   "expr": "torch.isnan(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "isinf",
+   "dtype": "bf16",
+   "expr": "torch.isinf(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "nan_to_num",
+   "dtype": "bf16",
+   "expr": "torch.nan_to_num(x, nan=0.5, posinf=9.0, neginf=-9.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "masked_fill",
+   "dtype": "bf16",
+   "expr": "x.masked_fill(x < 0, -7.0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int32",
+   "dtype": "bf16",
+   "expr": "x.to(torch.int32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_int64",
+   "dtype": "bf16",
+   "expr": "x.to(torch.int64)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_uint8",
+   "dtype": "bf16",
+   "expr": "x.to(torch.uint8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean",
+   "dtype": "bf16",
+   "expr": "x.mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amin",
+   "dtype": "bf16",
+   "expr": "x.amin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "max",
+   "dtype": "bf16",
+   "expr": "x.max()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmin",
+   "dtype": "bf16",
+   "expr": "x.argmin()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "softmax",
+   "dtype": "bf16",
+   "expr": "x.softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "log_softmax",
+   "dtype": "bf16",
+   "expr": "x.log_softmax(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "var_mean",
+   "dtype": "bf16",
+   "expr": "torch.var_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "std_mean",
+   "dtype": "bf16",
+   "expr": "torch.std_mean(x)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.var_mean.correction is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "bf16",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "bf16",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "bf16",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "bf16",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "bf16",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-0.5",
+      "b": "-2.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.0",
+      "b": "-inf"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "bf16",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "4.188",
+      "b": "1.398"
+     },
+     "eager": "3.0",
+     "backend": "2.0"
+    },
+    {
+     "inputs": {
+      "a": "0.6992",
+      "b": "0.1001"
+     },
+     "eager": "7.0",
+     "backend": "6.0"
+    },
+    {
+     "inputs": {
+      "a": "-4.188",
+      "b": "1.398"
+     },
+     "eager": "-3.0",
+     "backend": "-2.0"
+    }
+   ]
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "bf16",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "-3.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-0.5",
+      "b": "-2.0"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.0",
+      "b": "-inf"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "fmod",
+   "dtype": "bf16",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "bf16",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow",
+   "dtype": "bf16",
+   "expr": "torch.pow(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "bf16",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "bf16",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "bf16",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "bf16",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "bf16",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "bf16",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "bf16",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "bf16",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "bf16",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "bf16",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "bf16",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "bf16",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "bf16",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "bf16",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_tensor",
+   "dtype": "bf16",
+   "expr": "torch.clamp(a, min=b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lerp",
+   "dtype": "bf16",
+   "expr": "torch.lerp(a, b, 0.25)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "xlogy",
+   "dtype": "bf16",
+   "expr": "torch.xlogy(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "i64",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "i64",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "i64",
+   "expr": "torch.sign(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "relu",
+   "dtype": "i64",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "i64",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "i64",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "i64",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "i64",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "i64",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "i64",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "i64",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "i64",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "i64",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "i64",
+   "expr": "x // 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "i64",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "i64",
+   "expr": "torch.remainder(x, -3)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "1"
+     },
+     "eager": "-2",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "x": "7"
+     },
+     "eager": "-2",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "x": "100"
+     },
+     "eager": "-2",
+     "backend": "1"
+    }
+   ]
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "i64",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "i64",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "i64",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "i64",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "i64",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "i64",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "i64",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "i64",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "i64",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "i64",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "i64",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "i64",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "i64",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "i64",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "i64",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "i64",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "i64",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "i64",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_not",
+   "dtype": "i64",
+   "expr": "torch.bitwise_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left_scalar",
+   "dtype": "i64",
+   "expr": "torch.bitwise_left_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right_scalar",
+   "dtype": "i64",
+   "expr": "torch.bitwise_right_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "to_int8",
+   "dtype": "i64",
+   "expr": "x.to(torch.int8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "prod",
+   "dtype": "i64",
+   "expr": "x[:4].prod()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean_float",
+   "dtype": "i64",
+   "expr": "x.float().mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "i64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "i64",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "i64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "i64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "i64",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "i64",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "i64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "i64",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "i64",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-1",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-7",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-100",
+      "b": "7"
+     },
+     "eager": "5",
+     "backend": "-2"
+    }
+   ]
+  },
+  {
+   "op": "pow",
+   "dtype": "i64",
+   "expr": "torch.pow(a, b.abs())",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "i64",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "i64",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "i64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "i64",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "i64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "i64",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "i64",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "i64",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "i64",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "i64",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "i64",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "i64",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "i64",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "i64",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_and",
+   "dtype": "i64",
+   "expr": "torch.bitwise_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_or",
+   "dtype": "i64",
+   "expr": "torch.bitwise_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_xor",
+   "dtype": "i64",
+   "expr": "torch.bitwise_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left",
+   "dtype": "i64",
+   "expr": "torch.bitwise_left_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right",
+   "dtype": "i64",
+   "expr": "torch.bitwise_right_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "i32",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "i32",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "i32",
+   "expr": "torch.sign(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "relu",
+   "dtype": "i32",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "i32",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "i32",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "i32",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "i32",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "i32",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "i32",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "i32",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "i32",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "i32",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "i32",
+   "expr": "x // 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "i32",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "i32",
+   "expr": "torch.remainder(x, -3)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "1"
+     },
+     "eager": "-2",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "x": "7"
+     },
+     "eager": "-2",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "x": "100"
+     },
+     "eager": "-2",
+     "backend": "1"
+    }
+   ]
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "i32",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "i32",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "i32",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "i32",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "i32",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "i32",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "i32",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "i32",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "i32",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "i32",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "i32",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "i32",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "i32",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "i32",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "i32",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "i32",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "i32",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "i32",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_not",
+   "dtype": "i32",
+   "expr": "torch.bitwise_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left_scalar",
+   "dtype": "i32",
+   "expr": "torch.bitwise_left_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right_scalar",
+   "dtype": "i32",
+   "expr": "torch.bitwise_right_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "to_int8",
+   "dtype": "i32",
+   "expr": "x.to(torch.int8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "prod",
+   "dtype": "i32",
+   "expr": "x[:4].prod()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean_float",
+   "dtype": "i32",
+   "expr": "x.float().mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "i32",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "i32",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "i32",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "i32",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "i32",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "i32",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "i32",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "i32",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "i32",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-1",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-7",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-100",
+      "b": "7"
+     },
+     "eager": "5",
+     "backend": "-2"
+    }
+   ]
+  },
+  {
+   "op": "pow",
+   "dtype": "i32",
+   "expr": "torch.pow(a, b.abs())",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "100",
+      "b": "7"
+     },
+     "eager": "276447232",
+     "backend": "-2147483648"
+    },
+    {
+     "inputs": {
+      "a": "-100",
+      "b": "7"
+     },
+     "eager": "-276447232",
+     "backend": "-2147483648"
+    }
+   ]
+  },
+  {
+   "op": "atan2",
+   "dtype": "i32",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "i32",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "i32",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "i32",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "i32",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "i32",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "i32",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "i32",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "i32",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "i32",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "i32",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "i32",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "i32",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "i32",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_and",
+   "dtype": "i32",
+   "expr": "torch.bitwise_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_or",
+   "dtype": "i32",
+   "expr": "torch.bitwise_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_xor",
+   "dtype": "i32",
+   "expr": "torch.bitwise_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left",
+   "dtype": "i32",
+   "expr": "torch.bitwise_left_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right",
+   "dtype": "i32",
+   "expr": "torch.bitwise_right_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "i8",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "i8",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "i8",
+   "expr": "torch.sign(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "relu",
+   "dtype": "i8",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "i8",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "i8",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "i8",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "i8",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "i8",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "i8",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "i8",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "i8",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "i8",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "i8",
+   "expr": "x // 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "i8",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "i8",
+   "expr": "torch.remainder(x, -3)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "1"
+     },
+     "eager": "-2",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "x": "7"
+     },
+     "eager": "-2",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "x": "100"
+     },
+     "eager": "-2",
+     "backend": "1"
+    }
+   ]
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "i8",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "i8",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "i8",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "i8",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "i8",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "i8",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "i8",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "i8",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "i8",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "i8",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "i8",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "i8",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "i8",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "i8",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "i8",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "i8",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "i8",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "i8",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_not",
+   "dtype": "i8",
+   "expr": "torch.bitwise_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left_scalar",
+   "dtype": "i8",
+   "expr": "torch.bitwise_left_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right_scalar",
+   "dtype": "i8",
+   "expr": "torch.bitwise_right_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "to_int8",
+   "dtype": "i8",
+   "expr": "x.to(torch.int8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "prod",
+   "dtype": "i8",
+   "expr": "x[:4].prod()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean_float",
+   "dtype": "i8",
+   "expr": "x.float().mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "i8",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "i8",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "i8",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "i8",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "i8",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "i8",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "i8",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "i8",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "i8",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-1",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-7",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-100",
+      "b": "7"
+     },
+     "eager": "5",
+     "backend": "-2"
+    }
+   ]
+  },
+  {
+   "op": "pow",
+   "dtype": "i8",
+   "expr": "torch.pow(a, b.abs())",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "atan2",
+   "dtype": "i8",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "i8",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "i8",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "i8",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "i8",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "i8",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "i8",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "i8",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "i8",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "i8",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "i8",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "i8",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "i8",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "i8",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_and",
+   "dtype": "i8",
+   "expr": "torch.bitwise_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_or",
+   "dtype": "i8",
+   "expr": "torch.bitwise_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_xor",
+   "dtype": "i8",
+   "expr": "torch.bitwise_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left",
+   "dtype": "i8",
+   "expr": "torch.bitwise_left_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right",
+   "dtype": "i8",
+   "expr": "torch.bitwise_right_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "abs",
+   "dtype": "u8",
+   "expr": "torch.abs(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "neg",
+   "dtype": "u8",
+   "expr": "torch.neg(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sign",
+   "dtype": "u8",
+   "expr": "torch.sign(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "relu",
+   "dtype": "u8",
+   "expr": "torch.relu(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "clamp",
+   "dtype": "u8",
+   "expr": "torch.clamp(x, -2, 2)",
+   "status": "unsupported",
+   "detail": "run: RuntimeError: method->execute() failed with error 0x12",
+   "examples": []
+  },
+  {
+   "op": "clamp_min",
+   "dtype": "u8",
+   "expr": "torch.clamp(x, min=0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow2",
+   "dtype": "u8",
+   "expr": "torch.pow(x, 2)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "square",
+   "dtype": "u8",
+   "expr": "torch.square(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add_scalar",
+   "dtype": "u8",
+   "expr": "x + 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul_scalar",
+   "dtype": "u8",
+   "expr": "x * -2",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar",
+   "dtype": "u8",
+   "expr": "x / 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_floor",
+   "dtype": "u8",
+   "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_scalar_trunc",
+   "dtype": "u8",
+   "expr": "torch.div(x, -3, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide_scalar",
+   "dtype": "u8",
+   "expr": "x // 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod_scalar",
+   "dtype": "u8",
+   "expr": "torch.fmod(x, 3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder_scalar",
+   "dtype": "u8",
+   "expr": "torch.remainder(x, -3)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "rsub_scalar",
+   "dtype": "u8",
+   "expr": "5 - x",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq_scalar",
+   "dtype": "u8",
+   "expr": "x == 3",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt_scalar",
+   "dtype": "u8",
+   "expr": "x < 0",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where_scalar",
+   "dtype": "u8",
+   "expr": "torch.where(x > 0, x, 0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor",
+   "dtype": "u8",
+   "expr": "torch.floor(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ceil",
+   "dtype": "u8",
+   "expr": "torch.ceil(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "round",
+   "dtype": "u8",
+   "expr": "torch.round(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "trunc",
+   "dtype": "u8",
+   "expr": "torch.trunc(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sqrt",
+   "dtype": "u8",
+   "expr": "torch.sqrt(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "exp",
+   "dtype": "u8",
+   "expr": "torch.exp(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sigmoid",
+   "dtype": "u8",
+   "expr": "torch.sigmoid(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_not",
+   "dtype": "u8",
+   "expr": "torch.logical_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_bool",
+   "dtype": "u8",
+   "expr": "x.to(torch.bool)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "to_float32",
+   "dtype": "u8",
+   "expr": "x.to(torch.float32)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sum",
+   "dtype": "u8",
+   "expr": "x.sum()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "cumsum",
+   "dtype": "u8",
+   "expr": "x.cumsum(0)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "amax",
+   "dtype": "u8",
+   "expr": "x.amax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "argmax",
+   "dtype": "u8",
+   "expr": "x.argmax()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_not",
+   "dtype": "u8",
+   "expr": "torch.bitwise_not(x)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left_scalar",
+   "dtype": "u8",
+   "expr": "torch.bitwise_left_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right_scalar",
+   "dtype": "u8",
+   "expr": "torch.bitwise_right_shift(x, 1)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor_Scalar is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "to_int8",
+   "dtype": "u8",
+   "expr": "x.to(torch.int8)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "prod",
+   "dtype": "u8",
+   "expr": "x[:4].prod()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mean_float",
+   "dtype": "u8",
+   "expr": "x.float().mean()",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "u8",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "u8",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "u8",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "u8",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_floor",
+   "dtype": "u8",
+   "expr": "torch.div(a, b, rounding_mode=\"floor\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div_trunc",
+   "dtype": "u8",
+   "expr": "torch.div(a, b, rounding_mode=\"trunc\")",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "u8",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "fmod",
+   "dtype": "u8",
+   "expr": "torch.fmod(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "u8",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "pow",
+   "dtype": "u8",
+   "expr": "torch.pow(a, b.abs())",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "127",
+      "b": "254"
+     },
+     "eager": "1",
+     "backend": "0"
+    },
+    {
+     "inputs": {
+      "a": "5",
+      "b": "251"
+     },
+     "eager": "29",
+     "backend": "0"
+    },
+    {
+     "inputs": {
+      "a": "251",
+      "b": "5"
+     },
+     "eager": "203",
+     "backend": "0"
+    }
+   ]
+  },
+  {
+   "op": "atan2",
+   "dtype": "u8",
+   "expr": "torch.atan2(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "copysign",
+   "dtype": "u8",
+   "expr": "torch.copysign(a, b)",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.copysign.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "u8",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "minimum",
+   "dtype": "u8",
+   "expr": "torch.minimum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "u8",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ne",
+   "dtype": "u8",
+   "expr": "torch.ne(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "lt",
+   "dtype": "u8",
+   "expr": "torch.lt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "le",
+   "dtype": "u8",
+   "expr": "torch.le(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "gt",
+   "dtype": "u8",
+   "expr": "torch.gt(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "ge",
+   "dtype": "u8",
+   "expr": "torch.ge(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_and",
+   "dtype": "u8",
+   "expr": "torch.logical_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_or",
+   "dtype": "u8",
+   "expr": "torch.logical_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "logical_xor",
+   "dtype": "u8",
+   "expr": "torch.logical_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "where",
+   "dtype": "u8",
+   "expr": "torch.where(a > b, a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_and",
+   "dtype": "u8",
+   "expr": "torch.bitwise_and(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_or",
+   "dtype": "u8",
+   "expr": "torch.bitwise_or(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "bitwise_xor",
+   "dtype": "u8",
+   "expr": "torch.bitwise_xor(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "shift_left",
+   "dtype": "u8",
+   "expr": "torch.bitwise_left_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_left_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "shift_right",
+   "dtype": "u8",
+   "expr": "torch.bitwise_right_shift(a, b.abs())",
+   "status": "unsupported",
+   "detail": "convert: SpecViolationError: Operator torch._ops.aten.bitwise_right_shift.Tensor is not in Core ATen opset (https://pytorch.org/docs/stable/torch.compiler_ir.html#core-aten-ir).\"",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "f32+i64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "f32+i64",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "f32+i64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "f32+i64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "f32+i64",
+   "expr": "torch.remainder(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "f32+i64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-0.0",
+      "b": "3"
+     },
+     "eager": "-0.0",
+     "backend": "0.0"
+    },
+    {
+     "inputs": {
+      "a": "-1.5",
+      "b": "-3"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
+    }
+   ]
+  },
+  {
+   "op": "maximum",
+   "dtype": "f32+i64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "f32+i64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "i8+u8",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "i8+u8",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "i8+u8",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "i8+u8",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "i8+u8",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-1",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-7",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-6",
+      "b": "253"
+     },
+     "eager": "247",
+     "backend": "-6"
+    }
+   ]
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "i8+u8",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "i8+u8",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "i8+u8",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "bool+i64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "bool+i64",
+   "expr": "torch.sub(a, b)",
+   "status": "skip",
+   "detail": "eager: NotImplementedError: Subtraction, the `-` operator, with a bool tensor is not supported. If you are trying to invert a mask, use the `~` or `logical_not()` operator instead.",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "bool+i64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "bool+i64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "bool+i64",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "True",
+      "b": "-3"
+     },
+     "eager": "-2",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "a": "True",
+      "b": "-2"
+     },
+     "eager": "-1",
+     "backend": "1"
+    },
+    {
+     "inputs": {
+      "a": "True",
+      "b": "-5"
+     },
+     "eager": "-4",
+     "backend": "1"
+    }
+   ]
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "bool+i64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "bool+i64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "bool+i64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "add",
+   "dtype": "i8+i64",
+   "expr": "torch.add(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "sub",
+   "dtype": "i8+i64",
+   "expr": "torch.sub(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "mul",
+   "dtype": "i8+i64",
+   "expr": "torch.mul(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "div",
+   "dtype": "i8+i64",
+   "expr": "torch.div(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "remainder",
+   "dtype": "i8+i64",
+   "expr": "torch.remainder(a, b)",
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "a": "-1",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-7",
+      "b": "3"
+     },
+     "eager": "2",
+     "backend": "-1"
+    },
+    {
+     "inputs": {
+      "a": "-100",
+      "b": "7"
+     },
+     "eager": "5",
+     "backend": "-2"
+    }
+   ]
+  },
+  {
+   "op": "floor_divide",
+   "dtype": "i8+i64",
+   "expr": "torch.floor_divide(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "maximum",
+   "dtype": "i8+i64",
+   "expr": "torch.maximum(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  },
+  {
+   "op": "eq",
+   "dtype": "i8+i64",
+   "expr": "torch.eq(a, b)",
+   "status": "ok",
+   "detail": "",
+   "examples": []
+  }
+ ]
+}

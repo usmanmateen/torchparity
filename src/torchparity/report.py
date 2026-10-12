@@ -119,15 +119,19 @@ def render(runs: list[dict], known: list[dict]) -> str:
     ops = list(table) + sorted({r["op"] for run in runs for r in run["results"]} - set(table))
     for op in ops:
         exprs = table.get(op, {})
-        expr = " / ".join(dict.fromkeys(exprs.values())) or next(
-            (r["expr"] for run in runs for r in run["results"] if r["op"] == op), "")
+        if len(set(exprs.values())) > 1:
+            expr = "<br>".join(f"{kind}: `{e}`" for kind, e in exprs.items())
+        else:
+            first = next(iter(exprs.values()), None) or next(
+                (r["expr"] for run in runs for r in run["results"] if r["op"] == op), "")
+            expr = f"`{first}`"
         cells = []
         for run in runs:
             results = [r for r in run["results"] if r["op"] == op]
             bad = [r["dtype"] for r in results if r["status"] in SEVERITY]
             cells.append(_cell(results, _known_links(known, run["backend"], op, bad)))
         if any(cells):
-            lines.append(f"| `{op}` | `{expr}` | " + " | ".join(cells) + " |")
+            lines.append(f"| `{op}` | {expr} | " + " | ".join(cells) + " |")
     lines += ["", "## Details", ""]
     for run in runs:
         bad = [r for r in run["results"] if r["status"] in SEVERITY]
