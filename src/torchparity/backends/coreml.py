@@ -62,7 +62,8 @@ class CoreMl(Backend):
                      "torch.jit.trace + ct.convert; values from constant folding (no Core ML runtime)")
 
     def compile(self, module, inputs):
-        # float16 inputs are converted with float16 compute, Core ML's default; float32 ones with float32.
+        # Compute in the input's precision: float16 for float16 inputs, as a float16 model would be
+        # converted, and float32 otherwise, since float16 compute changes float32 results by design.
         half = any(t.dtype == torch.float16 for t in inputs)
         precision = ct.precision.FLOAT16 if half else ct.precision.FLOAT32
         with quiet():

@@ -61,7 +61,8 @@ Unary ops run on 24 float values (16 for integers). Binary ops pair them with a 
 each element tests one combination, such as `-0.0 / -3.0` or `inf % 2.0`. Each case is one op on one
 dtype. The expected values come from eager PyTorch on the same inputs. Floating-point outputs are
 compared with a tolerance per dtype (`rtol` 1e-5 for float32, 2e-3 for float16), including the sign
-of zero.
+of zero. Ops whose result is a whole number, such as `floor`, `round` and floor division, must match
+exactly.
 
 A case that differs is either:
 
@@ -82,7 +83,9 @@ issue tracker before reporting, and please report them one at a time with a mini
 
 ### Notes per backend
 
-- **Core ML** has no runtime outside macOS. On Linux the inputs are folded into the model as
+- **Core ML** models are converted with float16 compute precision for float16 inputs and float32
+  for the rest, since float16 compute changes float32 results by design. Core ML has no runtime
+  outside macOS. On Linux the inputs are folded into the model as
   constants, so the values come from coremltools' constant folding: this checks the converter,
   not the Core ML runtime. On macOS the model runs on the Core ML CPU runtime (experimental).
   int64 is compared as int32, the only integer type Core ML has.

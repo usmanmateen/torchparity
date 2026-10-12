@@ -174,6 +174,9 @@ NOT_ELEMENTWISE = {"sum", "cumsum", "amax", "argmax", "mean", "amin", "max", "ar
                    "log_softmax", "var_mean", "std_mean", "prod", "mean_float"}
 # Float-to-integer casts. PyTorch leaves the result undefined for values out of range.
 CASTS = {"to_int32": torch.int32, "to_int64": torch.int64, "to_uint8": torch.uint8}
+# Ops whose result is a whole number, compared exactly instead of with a tolerance.
+EXACT = {"floor", "ceil", "round", "trunc", "floor_divide", "div_floor", "div_trunc", "floor_divide_scalar",
+         "div_scalar_floor", "div_scalar_trunc"}
 
 _NAMESPACE = {"torch": torch, "F": F}
 
@@ -205,6 +208,7 @@ class Case:
     inputs: tuple[torch.Tensor, ...]
     elementwise: bool = True
     cast_to: torch.dtype | None = None
+    exact: bool = False
 
     @property
     def id(self) -> str:
@@ -216,7 +220,7 @@ class Case:
 
     def subset(self, keep: torch.Tensor) -> Case:
         return Case(self.op, self.expr, self.dtype, tuple(t[keep] for t in self.inputs),
-                    self.elementwise, self.cast_to)
+                    self.elementwise, self.cast_to, self.exact)
 
 
 def float_tensor(values: Iterable[float], dtype: torch.dtype) -> torch.Tensor:
@@ -263,7 +267,7 @@ def build_cases(dtypes: Iterable[str] = FLOAT_DTYPES + INT_DTYPES, mixed: bool =
             expr = exprs[kind]
             binary = op in BINARY or op in FLOAT_BINARY or op in INT_BINARY
             cases.append(Case(op, expr, dtype, (a, b) if binary else (a,),
-                              elementwise=op not in NOT_ELEMENTWISE, cast_to=CASTS.get(op)))
+                              elementwise=op not in NOT_ELEMENTWISE, cast_to=CASTS.get(op), exact=op in EXACT))
     if mixed:
         allowed = set(dtypes) | {"bool"}
         for left, right in MIXED_PAIRS:
@@ -272,7 +276,7 @@ def build_cases(dtypes: Iterable[str] = FLOAT_DTYPES + INT_DTYPES, mixed: bool =
             a = _values(left)[:len(INT_A)] if left in FLOAT_DTYPES else int_tensor(INT_A, DTYPES[left])
             b = int_tensor(INT_B, DTYPES[right])
             for op in MIXED:
-                cases.append(Case(op, _expr(BINARY[op], "float"), f"{left}+{right}", (a, b)))
+                cases.append(Case(op, _expr(BINARY[op], "float"), f"{left}+{right}", (a, b), exact=op in EXACT))
     return cases
 
 

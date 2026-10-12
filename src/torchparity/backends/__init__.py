@@ -20,7 +20,10 @@ BACKENDS = {
 
 
 def get_backend(name: str) -> Backend:
-    if name not in BACKENDS:
-        raise KeyError(f"unknown backend {name!r}; choose from {', '.join(BACKENDS)}")
-    module, cls = BACKENDS[name].split(":")
+    """A backend by name, or by "module:Class" for one defined outside torchparity."""
+    if name in BACKENDS:
+        name = BACKENDS[name]
+    elif ":" not in name:
+        raise KeyError(f"unknown backend {name!r}; choose from {', '.join(BACKENDS)} or give module:Class")
+    module, cls = name.split(":")
     return getattr(importlib.import_module(module), cls)()

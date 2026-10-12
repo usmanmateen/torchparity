@@ -35,7 +35,7 @@ def _describe(result) -> str:
 def _run(args) -> int:
     from .backends import get_backend
     from .cases import build_cases, expression_case
-    from .runner import run, save
+    from .runner import run, run_isolated, save
 
     backend = get_backend(args.backend)
     dtypes = args.dtypes.split(",") if args.dtypes else list(backend.dtypes)
@@ -53,7 +53,10 @@ def _run(args) -> int:
         if result.status != "ok" and (args.verbose or result.status in ("wrong", "edge", "unsupported")):
             print(f"{ICONS[result.status]} {result.status:11s} {case.id:24s} {_describe(result)}", flush=True)
 
-    results = run(backend, cases, progress)
+    if args.in_process:
+        results = run(backend, cases, progress)
+    else:
+        results = run_isolated(backend.name, cases, progress)
     counts = Counter(r.status for r in results)
     print(" · ".join(f"{ICONS[s]} {s} {counts[s]}" for s in ("ok", "wrong", "edge", "unsupported", "skip")))
     if args.output:
@@ -98,6 +101,8 @@ def main(argv=None) -> int:
     p.add_argument("--fail-on", nargs="+", choices=("wrong", "edge", "unsupported"),
                    help="exit with status 1 if any case has one of these statuses")
     p.add_argument("-v", "--verbose", action="store_true", help="also print skipped cases")
+    p.add_argument("--in-process", action="store_true",
+                   help="run cases in this process; by default a worker process runs them, so a crash fails one case")
     p.set_defaults(func=_run)
 
     p = sub.add_parser("report", help="write a Markdown report from saved results")

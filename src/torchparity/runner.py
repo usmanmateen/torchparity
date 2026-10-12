@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime
 import json
+import multiprocessing
 import platform
 import re
 from collections.abc import Callable, Iterable
@@ -13,7 +14,7 @@ from pathlib import Path
 import torch
 
 from . import __version__
-from .backends import Backend, NotChecked
+from .backends import Backend, NotChecked, get_backend
 from .cases import Case
 from .compare import as_tuple, compare, edge_values, examples, ordinary_inputs, overflow, undefined
 
@@ -82,7 +83,7 @@ def check(backend: Backend, case: Case) -> Result:
     if isinstance(out, Result):
         return out
     expected, actual = out
-    diff = compare(expected, actual, backend.narrows)
+    diff = compare(expected, actual, backend.narrows, case.exact)
     if diff is None:
         return Result(case.op, case.dtype, case.expr, "ok")
     if diff.bad is None:
@@ -109,9 +110,9 @@ def check(backend: Backend, case: Case) -> Result:
         return Result(case.op, case.dtype, case.expr, "edge", "values", found)
     sub = case.subset(keep)
     out = _execute(backend, sub)
-    if isinstance(out, Result) or compare(out[0], out[1], backend.narrows) is None:
+    if isinstance(out, Result) or compare(out[0], out[1], backend.narrows, case.exact) is None:
         return Result(case.op, case.dtype, case.expr, "edge", "values (ordinary inputs alone match)", found)
-    sub_diff = compare(out[0], out[1], backend.narrows)
+    sub_diff = compare(out[0], out[1], backend.narrows, case.exact)
     if sub_diff.bad is not None:
         found = examples(sub, out[0][sub_diff.output], sub_diff.actual, sub_diff.bad)
     return Result(case.op, case.dtype, case.expr, "wrong", "values (also with ordinary inputs alone)", found)
@@ -125,6 +126,50 @@ def run(backend: Backend, cases: Iterable[Case],
         results.append(result)
         if progress:
             progress(case, result)
+    return results
+
+
+def _worker(name: str, cases: list[Case], start: int, conn) -> None:
+    backend = get_backend(name)
+    for index in range(start, len(cases)):
+        conn.send((index, check(backend, cases[index])))
+    conn.close()
+
+
+def run_isolated(name: str, cases: list[Case],
+                 progress: Callable[[Case, Result], None] | None = None) -> list[Result]:
+    """Like ``run``, in a worker process, so a crash in native code fails one case instead of the run.
+
+    A case that crashes a worker is retried as the first case of a new worker, and only counts as a
+    crash if it crashes there too: some runtimes crash on state left behind by earlier cases.
+    """
+    context = multiprocessing.get_context("spawn")
+    results: list[Result] = []
+    retry = False
+    while len(results) < len(cases):
+        receiver, sender = context.Pipe(duplex=False)
+        worker = context.Process(target=_worker, args=(name, cases, len(results), sender), daemon=True)
+        worker.start()
+        sender.close()
+        first = True
+        while len(results) < len(cases):
+            try:
+                _, result = receiver.recv()
+            except EOFError:
+                worker.join()
+                if not (retry and first):
+                    retry = True  # rerun this case in a fresh worker
+                    break
+                case = cases[len(results)]
+                code = worker.exitcode
+                reason = f"signal {-code}" if code is not None and code < 0 else f"exit code {code}"
+                result = Result(case.op, case.dtype, case.expr, "unsupported", f"crashed ({reason})")
+            retry = first = False
+            results.append(result)
+            if progress:
+                progress(cases[len(results) - 1], result)
+        receiver.close()
+        worker.join()
     return results
 
 

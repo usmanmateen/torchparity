@@ -122,3 +122,22 @@ def test_error_message_skips_location_headers():
             raise RuntimeError("generic") from inner
     except RuntimeError as outer:
         assert _first_line(outer) == "ValueError: specific"
+
+
+def test_run_isolated_matches_in_process():
+    from torchparity.runner import run_isolated
+
+    cases = [c for c in build_cases(["f32"], mixed=False) if c.op in ("add", "sign", "sum")]
+    assert [r.status for r in run_isolated("inductor", cases)] == ["ok"] * len(cases)
+
+
+def test_a_crash_fails_one_case(monkeypatch):
+    import os
+
+    from torchparity.runner import run_isolated
+
+    monkeypatch.syspath_prepend(os.path.dirname(__file__))
+    cases = [c for c in build_cases(["f32"], mixed=False) if c.op in ("add", "sign", "sum")]
+    statuses = [(r.op, r.status, r.detail) for r in run_isolated("crashing_backend:Crashing", cases)]
+    assert ("sign", "unsupported", "crashed (signal 6)") in statuses
+    assert [s for op, s, _ in statuses if op != "sign"] == ["ok", "ok"]

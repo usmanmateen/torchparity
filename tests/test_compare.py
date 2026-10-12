@@ -43,3 +43,10 @@ def test_edge_values():
     t = torch.tensor([0.0, -0.0, 1.0, 1e6, 1e-7, math.nan, -math.inf])
     assert edge_values(t).tolist() == [False, True, False, True, True, True, True]
     assert edge_values(torch.tensor([5, 1_000_000])).tolist() == [False, True]
+
+
+def test_exact_compare_for_whole_number_results():
+    e = torch.tensor([3.0], dtype=torch.float64)
+    a = torch.tensor([2.9999999999999996], dtype=torch.float64)
+    assert compare(e, a) is None
+    assert compare(e, a, exact=True) is not None

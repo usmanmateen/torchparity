@@ -53,7 +53,8 @@ def fmt(value, dtype: torch.dtype) -> str:
     return text if any(c in text for c in ".en") else text + ".0"
 
 
-def compare(expected, actual, narrows: dict[torch.dtype, torch.dtype] | None = None) -> Difference | None:
+def compare(expected, actual, narrows: dict[torch.dtype, torch.dtype] | None = None,
+            exact: bool = False) -> Difference | None:
     """Compare all outputs; return the first difference.
 
     ``narrows`` maps a PyTorch dtype to the dtype a backend returns instead by design
@@ -72,7 +73,7 @@ def compare(expected, actual, narrows: dict[torch.dtype, torch.dtype] | None = N
         if e.shape != a.shape:
             return Difference(f"shape {tuple(a.shape)}, eager gives {tuple(e.shape)}", output=i)
         if e.dtype.is_floating_point:
-            rtol, atol = TOLERANCES.get(e.dtype, (1e-5, 1e-6))
+            rtol, atol = (0.0, 0.0) if exact else TOLERANCES.get(e.dtype, (1e-5, 1e-6))
             close = torch.isclose(a.double(), e.double(), rtol=rtol, atol=atol, equal_nan=True)
             # isclose treats -0.0 == 0.0 and ignores the sign of infinities only through equality;
             # check the sign of zero results so that atan2/copysign-style differences are caught.
