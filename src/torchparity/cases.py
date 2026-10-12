@@ -166,7 +166,8 @@ INT_BINARY = {
 }
 # Type promotion between different input dtypes.
 MIXED = ("add", "sub", "mul", "div", "remainder", "floor_divide", "maximum", "eq")
-MIXED_PAIRS = (("f32", "i64"), ("i8", "u8"), ("i64", "bool"), ("i8", "i64"))
+# The right operand comes from INT_B, which has no zeros, so integer division is defined.
+MIXED_PAIRS = (("f32", "i64"), ("i8", "u8"), ("bool", "i64"), ("i8", "i64"))
 
 # Ops where an output element depends on more than the input element at the same index.
 NOT_ELEMENTWISE = {"sum", "cumsum", "amax", "argmax", "mean", "amin", "max", "argmin", "softmax",
@@ -269,7 +270,7 @@ def build_cases(dtypes: Iterable[str] = FLOAT_DTYPES + INT_DTYPES, mixed: bool =
             if left not in allowed or right not in allowed:
                 continue
             a = _values(left)[:len(INT_A)] if left in FLOAT_DTYPES else int_tensor(INT_A, DTYPES[left])
-            b = int_tensor(INT_A, DTYPES[right])
+            b = int_tensor(INT_B, DTYPES[right])
             for op in MIXED:
                 cases.append(Case(op, _expr(BINARY[op], "float"), f"{left}+{right}", (a, b)))
     return cases

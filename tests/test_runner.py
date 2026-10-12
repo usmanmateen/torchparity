@@ -108,3 +108,17 @@ def test_expression_case():
     assert check(Eager(), cases[0]).status == "ok"
     with pytest.raises(ValueError):
         expression_case("torch.zeros(3)", ["f32"])
+
+
+def test_error_message_skips_location_headers():
+    from torchparity.runner import _first_line
+
+    exc = RuntimeError("Check 'false' failed at src/x.cpp:151:\nSummary:\n-- No conversion rule for aten::trunc\n")
+    assert _first_line(exc) == "RuntimeError: No conversion rule for aten::trunc"
+    try:
+        try:
+            raise ValueError("specific\nmore")
+        except ValueError as inner:
+            raise RuntimeError("generic") from inner
+    except RuntimeError as outer:
+        assert _first_line(outer) == "ValueError: specific"

@@ -42,7 +42,10 @@ def _first_line(exc: BaseException, limit: int = 200) -> str:
         exc = exc.__cause__
     message = re.sub(r"\x1b\[[0-9;]*m", "", str(exc))
     lines = [line.strip() for line in message.strip().splitlines() if line.strip()]
-    text = f"{type(exc).__name__}: {lines[0] if lines else ''}".rstrip(": ")
+    line = lines[0] if lines else ""
+    if line.endswith(":") and len(lines) > 1:  # a location header; the last line says what failed
+        line = lines[-1].lstrip("- ")
+    text = f"{type(exc).__name__}: {line}".rstrip(": ")
     return text[:limit]
 
 

@@ -13,13 +13,13 @@ import sys
 import coremltools as ct
 import numpy as np
 import torch
+from coremltools.converters.mil.mil import types
 
 from ..compare import as_tuple
 from ._base import Backend, NotChecked, quiet
 
 _NP_TYPES = {torch.float32: np.float32, torch.float16: np.float16, torch.int32: np.int32,
              torch.int64: np.int32, torch.bool: np.bool_}
-_PRECISION = ct.precision.FLOAT32
 
 
 class _Constants(torch.nn.Module):
@@ -35,6 +35,13 @@ class _Constants(torch.nn.Module):
     def forward(self, x):
         out = as_tuple(self.inner(*[getattr(self, f"c{i}") for i in range(self.count)]))
         return (*out, x + 1)
+
+
+def _torch_dtype(builtin) -> torch.dtype | None:
+    try:
+        return torch.from_numpy(np.zeros(0, dtype=types.nptype_from_builtin(builtin))).dtype
+    except Exception:
+        return None
 
 
 def _tensor_types(inputs):
@@ -55,24 +62,31 @@ class CoreMl(Backend):
                      "torch.jit.trace + ct.convert; values from constant folding (no Core ML runtime)")
 
     def compile(self, module, inputs):
+        # float16 inputs are converted with float16 compute, Core ML's default; float32 ones with float32.
+        half = any(t.dtype == torch.float16 for t in inputs)
+        precision = ct.precision.FLOAT16 if half else ct.precision.FLOAT32
         with quiet():
             traced = torch.jit.trace(module, inputs)
             if self.predict:
-                return self._predictor(traced, inputs)
-            ct.convert(traced, inputs=_tensor_types(inputs), convert_to="milinternal",
-                       minimum_deployment_target=ct.target.iOS18, compute_precision=_PRECISION)
+                return self._predictor(traced, inputs, precision)
+            converted = ct.convert(traced, inputs=_tensor_types(inputs), convert_to="milinternal",
+                                   minimum_deployment_target=ct.target.iOS18, compute_precision=precision)
             exported = torch.export.export(_Constants(module, inputs), (torch.zeros(1),)).run_decompositions({})
             program = ct.convert(exported, convert_to="milinternal",
-                                 minimum_deployment_target=ct.target.iOS18, compute_precision=_PRECISION)
+                                 minimum_deployment_target=ct.target.iOS18, compute_precision=precision)
         outputs = program.functions["main"].outputs[:-1]
         if any(var.val is None for var in outputs):
             raise NotChecked("not constant-folded")
+        # Values come from constant folding; dtypes from the model converted with real inputs.
+        dtypes = [_torch_dtype(var.dtype) for var in converted.functions["main"].outputs]
         values = tuple(torch.from_numpy(np.array(var.val)) for var in outputs)
+        if len(dtypes) == len(values):
+            values = tuple(v.to(d) if d is not None else v for v, d in zip(values, dtypes, strict=True))
         return lambda args: values
 
-    def _predictor(self, traced, inputs):
+    def _predictor(self, traced, inputs, precision):
         model = ct.convert(traced, inputs=_tensor_types(inputs), convert_to="mlprogram",
-                           minimum_deployment_target=ct.target.macOS15, compute_precision=_PRECISION,
+                           minimum_deployment_target=ct.target.macOS15, compute_precision=precision,
                            compute_units=ct.ComputeUnit.CPU_ONLY)
         names = [o.name for o in model.get_spec().description.output]
 
