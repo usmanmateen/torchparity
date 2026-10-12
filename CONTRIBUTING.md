@@ -14,6 +14,14 @@ ruff check .
 
 Add the extra for any other backend you work on (`openvino`, `coreml`, `executorch`, `tensorrt`).
 
+Optionally, `pip install pre-commit && pre-commit install` runs ruff on each commit.
+
+## Pull requests
+
+`main` only changes through pull requests. CI (lint, unit tests and a short ONNX run on Python 3.10
+and 3.12) must pass before merging, and pull requests are squash-merged. Keep one change per pull
+request, and fill in the template.
+
 ## Add an op
 
 Ops live in `src/torchparity/cases.py` as Python expressions over `x` (unary) or `a` and `b`
