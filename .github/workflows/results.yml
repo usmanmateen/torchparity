@@ -1,0 +1,68 @@
+# Re-runs every CPU backend on its latest release each week and opens a pull request
+# when RESULTS.md changes. Torch-TensorRT needs a CUDA GPU, so results/tensorrt.json
+# is produced locally and committed.
+name: Results
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  run:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - backend: onnx
+            packages: onnxscript onnx onnxruntime
+          - backend: openvino
+            packages: openvino
+          - backend: coreml
+            packages: coremltools
+          - backend: executorch
+            packages: executorch
+          - backend: inductor
+            packages: ""
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install --extra-index-url https://download.pytorch.org/whl/cpu -e . ${{ matrix.packages }}
+      - name: Run
+        run: torchparity run ${{ matrix.backend }} -o results/${{ matrix.backend }}.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: results-${{ matrix.backend }}
+          path: results/${{ matrix.backend }}.json
+
+  report:
+    needs: run
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          path: results
+          pattern: results-*
+          merge-multiple: true
+      - name: Report
+        run: |
+          pip install --extra-index-url https://download.pytorch.org/whl/cpu -e .
+          torchparity report results/*.json -o RESULTS.md --readme README.md
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: weekly-results
+          commit-message: Update results
+          title: Update results
+          body: Weekly run of every CPU backend on its latest release.

@@ -1,0 +1,94 @@
+# Issues and pull requests behind differences in RESULTS.md.
+# The report links a cell to an entry when backend and op match (and dtype, if `dtypes` is set).
+# `found_here = true` marks the ones found with torchparity.
+
+[[issue]]
+backend = "onnx"
+ops = ["shift_left", "shift_right", "shift_left_scalar", "shift_right_scalar"]
+dtypes = ["u8"]
+title = "Bitwise shifts on unsigned integers return a signed type"
+pr = "https://github.com/microsoft/onnxscript/pull/3088"
+found_here = true
+
+[[issue]]
+backend = "onnx"
+ops = ["clamp_min"]
+dtypes = ["f32", "f64", "f16"]
+title = "torch.clamp with one bound turns infinities into the largest finite value"
+pr = "https://github.com/microsoft/onnxscript/pull/3089"
+found_here = true
+
+[[issue]]
+backend = "openvino"
+ops = ["div_trunc", "div_scalar_trunc", "trunc"]
+title = "torch.div(rounding_mode=\"trunc\") overflows through int32; aten::trunc is not supported"
+issue = "https://github.com/openvinotoolkit/openvino/issues/38750"
+pr = "https://github.com/openvinotoolkit/openvino/pull/38753"
+found_here = true
+
+[[issue]]
+backend = "openvino"
+ops = ["atan2"]
+dtypes = ["i64", "i32", "i8", "u8"]
+title = "torch.atan2 on integer tensors returns integers instead of float32"
+issue = "https://github.com/openvinotoolkit/openvino/issues/38751"
+pr = "https://github.com/openvinotoolkit/openvino/pull/38752"
+found_here = true
+
+[[issue]]
+backend = "openvino"
+ops = ["div_floor", "floor_divide", "div_scalar_floor", "floor_divide_scalar"]
+dtypes = ["i64", "i32", "i8", "u8"]
+title = "Integer floor division rounds toward zero for negative results"
+issue = "https://github.com/openvinotoolkit/openvino/issues/38248"
+found_here = false
+
+[[issue]]
+backend = "tensorrt"
+ops = ["div", "div_scalar"]
+dtypes = ["i64", "i32", "i8", "u8", "bool"]
+title = "True division of int64 tensors or by a Python int truncates the result"
+issue = "https://github.com/pytorch/TensorRT/issues/4849"
+pr = "https://github.com/pytorch/TensorRT/pull/4850"
+found_here = true
+
+[[issue]]
+backend = "executorch"
+ops = ["remainder", "remainder_scalar"]
+title = "Portable remainder: wrong sign for integers, float64 rounded to float"
+issue = "https://github.com/pytorch/executorch/issues/23682"
+pr = "https://github.com/pytorch/executorch/pull/23683"
+found_here = true
+
+[[issue]]
+backend = "executorch"
+ops = ["floor_divide", "div_floor", "floor_divide_scalar", "div_scalar_floor"]
+dtypes = ["f64", "f32", "f16", "bf16"]
+title = "Portable floor_divide returns non-whole numbers for floats and wrong values for a zero divisor"
+issue = "https://github.com/pytorch/executorch/issues/23684"
+pr = "https://github.com/pytorch/executorch/pull/23685"
+found_here = true
+
+[[issue]]
+backend = "executorch"
+ops = ["log_softmax"]
+dtypes = ["f64"]
+title = "Optimized log_softmax does not support float64"
+pr = "https://github.com/pytorch/executorch/pull/23686"
+found_here = true
+
+[[issue]]
+backend = "executorch"
+ops = ["var_mean", "std_mean"]
+title = "torch.var_mean and torch.std_mean fail in to_edge"
+issue = "https://github.com/pytorch/executorch/issues/23680"
+pr = "https://github.com/pytorch/executorch/pull/23681"
+found_here = true
+
+[[issue]]
+backend = "coreml"
+ops = ["log2", "log10", "expm1", "asinh", "acosh", "hardtanh", "atan2"]
+dtypes = ["f16"]
+title = "float32 scalar constants on float16 inputs fail conversion in log2, log10, expm1, asinh, acosh, hardtanh and atan2"
+pr = "https://github.com/apple/coremltools/pull/2894"
+found_here = true
