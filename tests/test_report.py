@@ -40,3 +40,17 @@ def test_render_found():
     assert "| o/r | A \\| B ([issue](https://github.com/o/r/issues/2)) | " in text
     assert "https://img.shields.io/github/pulls/detail/state/o/r/3" in text
     assert "other" not in text
+
+
+def test_update_readme_blocks(tmp_path):
+    from torchparity.report import update_readme
+
+    readme = tmp_path / "README.md"
+    readme.write_text("top\n<!-- found:start -->\nold\n<!-- found:end -->\n<!-- summary:start -->\n"
+                      "<!-- summary:end -->\nbottom\n", encoding="utf-8")
+    runs = [run("onnx", "ONNX Runtime", [result("div", "i64", "ok"), result("div", "i32", "wrong")])]
+    runs[0]["versions"] = {"torch": "2", "onnxruntime": "1.31"}
+    update_readme(readme, [], runs)
+    text = readme.read_text(encoding="utf-8")
+    assert "old" not in text and text.startswith("top\n") and text.endswith("bottom\n")
+    assert "| ONNX Runtime | onnxruntime 1.31 | 1 | 1 | 0 | 0 |" in text

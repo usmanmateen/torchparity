@@ -5,7 +5,7 @@ import torch
 
 from torchparity.backends import Backend
 from torchparity.cases import Case, build_cases, expression_case, float_tensor, int_tensor
-from torchparity.runner import check
+from torchparity.runner import check_case as check
 
 
 class Eager(Backend):
@@ -141,3 +141,21 @@ def test_a_crash_fails_one_case(monkeypatch):
     statuses = [(r.op, r.status, r.detail) for r in run_isolated("crashing_backend:Crashing", cases)]
     assert ("sign", "unsupported", "crashed (signal 6)") in statuses
     assert [s for op, s, _ in statuses if op != "sign"] == ["ok", "ok"]
+
+
+def test_select_cases():
+    from torchparity.runner import select_cases
+
+    cases = select_cases(Eager(), dtypes=["f32", "i64"], ops=["div", "sign"])
+    assert sorted(c.id for c in cases) == ["div/f32", "div/i64", "sign/f32", "sign/i64"]
+    assert [c.id for c in select_cases(Eager(), match=["remainder/i8"])] == ["remainder/i8", "remainder/i8+u8",
+                                                                             "remainder/i8+i64"]
+    with pytest.raises(ValueError, match="does not check"):
+        select_cases(Eager(), dtypes=["c64"])
+
+
+def test_top_level_check():
+    import torchparity
+
+    results = torchparity.check(Eager(), ops=["add", "atan2"], dtypes=["i32"])
+    assert [(r.op, r.status) for r in results] == [("add", "ok"), ("atan2", "ok")]

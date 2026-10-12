@@ -88,12 +88,34 @@ def render_found(known: list[dict]) -> str:
     return "\n".join(rows)
 
 
-def update_readme(path, known: list[dict]) -> None:
-    text = Path(path).read_text(encoding="utf-8")
-    start, end = "<!-- found:start -->", "<!-- found:end -->"
+def render_summary(runs: list[dict]) -> str:
+    """Per-backend counts, with the version of the backend's own package."""
+    rows = ["| Backend | Version | ✅ same | ❌ wrong | ⚠️ edge only | 🚫 fails |", "|---|---|---|---|---|---|"]
+    for run in runs:
+        counts = Counter(r["status"] for r in run["results"])
+        versions = run["versions"]
+        own = [f"{k} {v}" for k, v in versions.items() if k != "torch"] or [f"torch {versions.get('torch')}"]
+        rows.append(f"| {run['label']} | {own[-1]} | {counts['ok']} | {counts['wrong']} | {counts['edge']} | "
+                    f"{counts['unsupported']} |")
+    return "\n".join(rows)
+
+
+def _replace_block(text: str, name: str, body: str) -> str:
+    start, end = f"<!-- {name}:start -->", f"<!-- {name}:end -->"
+    if start not in text:
+        return text
     head, rest = text.split(start, 1)
     _, tail = rest.split(end, 1)
-    Path(path).write_text(f"{head}{start}\n{render_found(known)}\n{end}{tail}", encoding="utf-8")
+    return f"{head}{start}\n{body}\n{end}{tail}"
+
+
+def update_readme(path, known: list[dict], runs: list[dict] | None = None) -> None:
+    """Refresh the generated blocks of a README: found issues and, given results, the summary."""
+    text = Path(path).read_text(encoding="utf-8")
+    text = _replace_block(text, "found", render_found(known))
+    if runs:
+        text = _replace_block(text, "summary", render_summary(runs))
+    Path(path).write_text(text, encoding="utf-8", newline="\n")
 
 
 def render(runs: list[dict], known: list[dict]) -> str:

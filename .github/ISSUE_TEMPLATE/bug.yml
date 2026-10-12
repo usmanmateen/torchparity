@@ -1,0 +1,18 @@
+name: Bug in torchparity
+description: torchparity itself crashes, misclassifies a case, or reports something wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The command you ran, what it printed, and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Versions
+      description: Output of `torchparity --version` and the versions of torch and the backend package.
+    validations:
+      required: true

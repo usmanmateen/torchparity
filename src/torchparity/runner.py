@@ -15,7 +15,7 @@ import torch
 
 from . import __version__
 from .backends import Backend, NotChecked, get_backend
-from .cases import Case
+from .cases import Case, build_cases, expression_case
 from .compare import as_tuple, compare, edge_values, examples, ordinary_inputs, overflow, undefined
 
 # ok: same result as eager.
@@ -35,6 +35,27 @@ class Result:
     status: str
     detail: str = ""
     examples: list[dict] = field(default_factory=list)
+
+
+def select_cases(backend: Backend, *, dtypes: Iterable[str] | None = None, ops: Iterable[str] | None = None,
+                 expr: str | None = None, match: Iterable[str] | None = None) -> list[Case]:
+    """The cases to run on ``backend``.
+
+    dtypes: dtype names such as "f32" or "i64" (default: every dtype the backend checks, plus mixed pairs).
+    ops: exact op names. match: substrings of case ids such as "div" or "/f16".
+    expr: your own expression over ``x``, or over ``a`` and ``b``, instead of the built-in ops.
+    """
+    chosen = list(dtypes) if dtypes else list(backend.dtypes)
+    unknown = sorted(set(chosen) - set(backend.dtypes))
+    if unknown and not expr:
+        raise ValueError(f"{backend.name} does not check {', '.join(unknown)}; it checks {', '.join(backend.dtypes)}")
+    cases = expression_case(expr, chosen) if expr else build_cases(chosen, mixed=not dtypes)
+    if ops:
+        wanted = set(ops)
+        cases = [c for c in cases if c.op in wanted]
+    if match:
+        cases = [c for c in cases if any(m in c.id for m in match)]
+    return cases
 
 
 def _first_line(exc: BaseException, limit: int = 200) -> str:
@@ -78,7 +99,7 @@ def _execute(backend: Backend, case: Case):
     return expected, actual
 
 
-def check(backend: Backend, case: Case) -> Result:
+def check_case(backend: Backend, case: Case) -> Result:
     out = _execute(backend, case)
     if isinstance(out, Result):
         return out
@@ -122,7 +143,7 @@ def run(backend: Backend, cases: Iterable[Case],
         progress: Callable[[Case, Result], None] | None = None) -> list[Result]:
     results = []
     for case in cases:
-        result = check(backend, case)
+        result = check_case(backend, case)
         results.append(result)
         if progress:
             progress(case, result)
@@ -132,7 +153,7 @@ def run(backend: Backend, cases: Iterable[Case],
 def _worker(name: str, cases: list[Case], start: int, conn) -> None:
     backend = get_backend(name)
     for index in range(start, len(cases)):
-        conn.send((index, check(backend, cases[index])))
+        conn.send((index, check_case(backend, cases[index])))
     conn.close()
 
 

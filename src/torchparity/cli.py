@@ -24,6 +24,16 @@ def _backends(args) -> int:
     return 0
 
 
+def _ops(args) -> int:
+    from .cases import op_table
+
+    for op, exprs in op_table().items():
+        kinds = "/".join(exprs)
+        shown = " | ".join(dict.fromkeys(exprs.values()))
+        print(f"{op:20s} {kinds:10s} {shown}")
+    return 0
+
+
 def _describe(result) -> str:
     if result.examples:
         ex = result.examples[0]
@@ -34,20 +44,16 @@ def _describe(result) -> str:
 
 def _run(args) -> int:
     from .backends import get_backend
-    from .cases import build_cases, expression_case
-    from .runner import run, run_isolated, save
+    from .runner import run, run_isolated, save, select_cases
 
     backend = get_backend(args.backend)
-    dtypes = args.dtypes.split(",") if args.dtypes else list(backend.dtypes)
-    unknown = sorted(set(dtypes) - set(backend.dtypes))
-    if unknown and not args.expr:
-        print(f"{backend.name} does not check {', '.join(unknown)}; it checks {', '.join(backend.dtypes)}",
-              file=sys.stderr)
+    try:
+        cases = select_cases(backend, dtypes=args.dtypes.split(",") if args.dtypes else None,
+                             ops=args.ops.split(",") if args.ops else None, expr=args.expr, match=args.k)
+    except ValueError as exc:
+        print(exc, file=sys.stderr)
         return 2
-    cases = expression_case(args.expr, dtypes) if args.expr else build_cases(dtypes, mixed=not args.dtypes)
-    if args.k:
-        cases = [c for c in cases if any(k in c.id for k in args.k)]
-    print(f"{backend.label}: {len(cases)} cases ({backend.mode})", flush=True)
+    print(f"{backend.label}: {len(cases)} case{'' if len(cases) == 1 else 's'} ({backend.mode})", flush=True)
 
     def progress(case, result):
         if result.status != "ok" and (args.verbose or result.status in ("wrong", "edge", "unsupported")):
@@ -71,14 +77,15 @@ def _report(args) -> int:
     from .report import load_known, load_results, render, update_readme
 
     known = load_known(args.known)
-    text = render(load_results(args.results), known)
+    runs = load_results(args.results)
+    text = render(runs, known)
     if args.output:
         Path(args.output).write_text(text + "\n", encoding="utf-8")
         print(f"wrote {args.output}")
     else:
         print(text)
     if args.readme:
-        update_readme(args.readme, known)
+        update_readme(args.readme, known, runs)
         print(f"updated {args.readme}")
     return 0
 
@@ -92,8 +99,12 @@ def main(argv=None) -> int:
     p = sub.add_parser("backends", help="list backends and whether their packages are installed")
     p.set_defaults(func=_backends)
 
+    p = sub.add_parser("ops", help="list the ops, the dtype kinds they run on, and their expressions")
+    p.set_defaults(func=_ops)
+
     p = sub.add_parser("run", help="run the cases on one backend")
     p.add_argument("backend")
+    p.add_argument("--ops", help="comma-separated op names, e.g. div,remainder (see `torchparity ops`)")
     p.add_argument("-k", action="append", help="only cases whose id (op/dtype) contains this; repeatable")
     p.add_argument("--dtypes", help="comma-separated dtypes, e.g. f32,i64 (default: all the backend checks)")
     p.add_argument("--expr", help="check your own expression over x, or over a and b, e.g. 'torch.special.erfc(x)'")
