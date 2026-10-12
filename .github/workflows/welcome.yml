@@ -1,0 +1,26 @@
+# Thanks people the first time they open an issue or pull request here.
+name: Welcome
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/first-interaction@v3
+        with:
+          issue_message: >
+            Thanks for opening your first issue here! If it is about a difference on a backend,
+            please include the command you ran, its output and the versions
+            (`torchparity --version`, torch and the backend package).
+          pr_message: >
+            Thanks for your first pull request! CI runs lint, the unit tests and a short ONNX run;
+            CONTRIBUTING.md has the details.
