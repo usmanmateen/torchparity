@@ -68,7 +68,12 @@ def _first_line(exc: BaseException, limit: int = 200) -> str:
     if line.endswith(":") and len(lines) > 1:  # a location header; the last line says what failed
         line = lines[-1].lstrip("- ")
     text = f"{type(exc).__name__}: {line}".rstrip(": ")
-    return text[:limit]
+    if len(text) > limit:
+        # Keep whole sentences: what follows is often a signature or a list of types, whose
+        # order can change from run to run.
+        end = text.rfind(". ", 0, limit)
+        text = text[: end + 1] if end > limit // 4 else text[: limit - 3] + "..."
+    return text
 
 
 def _to(inputs, device):
