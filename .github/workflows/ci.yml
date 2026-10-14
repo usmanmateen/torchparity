@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  # The Results workflow starts CI this way on the pull requests it opens.
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
