@@ -53,6 +53,13 @@ def test_wrong_on_ordinary_values():
     assert r.examples[0] == {"inputs": {"x": "1.0"}, "eager": "2.0", "backend": "3.0"}
 
 
+def test_examples_are_distinct():
+    r = check(Eager(lambda out, args: out + 1), case("x * 2", [1.0, 1.0, 1.0, 2.0, 2.0, 3.0]))
+    assert [e["inputs"]["x"] for e in r.examples] == ["1.0", "2.0", "3.0"]
+    r = check(Eager(lambda out, args: out + 1), case("torch.softmax(x, 0)", [1.0, 1.0, 1.0], elementwise=False))
+    assert len(r.examples) == 1
+
+
 def test_edge_when_only_nan_differs():
     r = check(Eager(lambda out, args: torch.nan_to_num(out)), case("x * 2", [1.0, math.nan, math.inf]))
     assert r.status == "edge"
