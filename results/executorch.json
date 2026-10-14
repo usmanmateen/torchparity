@@ -8,9 +8,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD Ryzen 7 7800X3D 8-Core Processor",
- "python": "3.12.13",
- "date": "2026-10-12",
+ "cpu": "AMD EPYC 7763 64-Core Processor",
+ "python": "3.12.15",
+ "date": "2026-10-14",
  "results": [
   {
    "op": "abs",
@@ -537,10 +537,17 @@
    "examples": [
     {
      "inputs": {
-      "x": "inf"
+      "x": "-0.0"
      },
-     "eager": "nan",
-     "backend": "inf"
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "x": "-1e+10"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
     }
    ]
   },
@@ -3463,17 +3470,9 @@
    "op": "gelu",
    "dtype": "bf16",
    "expr": "F.gelu(x)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "inf"
-     },
-     "eager": "nan",
-     "backend": "inf"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "gelu_tanh",
@@ -4401,8 +4400,8 @@
    "op": "atan2",
    "dtype": "i64",
    "expr": "torch.atan2(a, b)",
-   "status": "ok",
-   "detail": "",
+   "status": "unsupported",
+   "detail": "crashed (signal 11)",
    "examples": []
   },
   {

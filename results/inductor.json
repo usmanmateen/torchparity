@@ -7,9 +7,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD Ryzen 7 7800X3D 8-Core Processor",
- "python": "3.12.13",
- "date": "2026-10-12",
+ "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+ "python": "3.12.15",
+ "date": "2026-10-14",
  "results": [
   {
    "op": "abs",
@@ -2378,13 +2378,6 @@
      },
      "eager": "0.0",
      "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "x": "-inf"
-     },
-     "eager": "inf",
-     "backend": "nan"
     },
     {
      "inputs": {
