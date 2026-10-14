@@ -10,9 +10,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD Ryzen 7 7800X3D 8-Core Processor",
- "python": "3.12.13",
- "date": "2026-10-12",
+ "cpu": "AMD EPYC 7763 64-Core Processor",
+ "python": "3.12.15",
+ "date": "2026-10-14",
  "results": [
   {
    "op": "abs",
@@ -364,7 +364,7 @@
    "dtype": "f32",
    "expr": "x.amax()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amax(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -599,10 +599,17 @@
    "examples": [
     {
      "inputs": {
-      "x": "inf"
+      "x": "-0.0"
      },
-     "eager": "nan",
-     "backend": "inf"
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "x": "-1e+10"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
     }
    ]
   },
@@ -739,7 +746,7 @@
    "dtype": "f32",
    "expr": "x.amin()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amin(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -1435,7 +1442,7 @@
    "dtype": "f64",
    "expr": "x.amax()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amax(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -1868,7 +1875,7 @@
    "dtype": "f64",
    "expr": "x.amin()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amin(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -1907,14 +1914,6 @@
    "status": "edge",
    "detail": "values (ordinary inputs alone match)",
    "examples": [
-    {
-     "eager": "nan",
-     "backend": "-inf"
-    },
-    {
-     "eager": "nan",
-     "backend": "-inf"
-    },
     {
      "eager": "nan",
      "backend": "-inf"
@@ -2329,13 +2328,6 @@
      },
      "eager": "nan",
      "backend": "-inf"
-    },
-    {
-     "inputs": {
-      "x": "inf"
-     },
-     "eager": "nan",
-     "backend": "inf"
     }
    ]
   },
@@ -2346,13 +2338,6 @@
    "status": "edge",
    "detail": "values",
    "examples": [
-    {
-     "inputs": {
-      "x": "0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    },
     {
      "inputs": {
       "x": "0.0"
@@ -2382,13 +2367,6 @@
      },
      "eager": "nan",
      "backend": "-inf"
-    },
-    {
-     "inputs": {
-      "x": "inf"
-     },
-     "eager": "nan",
-     "backend": "inf"
     }
    ]
   },
@@ -2557,7 +2535,7 @@
    "dtype": "f16",
    "expr": "x.amax()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amax(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -2909,7 +2887,7 @@
    "dtype": "f16",
    "expr": "x.amin()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amin(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -3535,7 +3513,7 @@
    "dtype": "i64",
    "expr": "x.amax()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amax(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -4087,7 +4065,7 @@
    "dtype": "i32",
    "expr": "x.amax()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amax(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -4656,7 +4634,7 @@
    "dtype": "i8",
    "expr": "x.amax()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amax(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {
@@ -5208,7 +5186,7 @@
    "dtype": "u8",
    "expr": "x.amax()",
    "status": "unsupported",
-   "detail": "convert: ValueError: Required parameter 'dim' is not provided. Signature: pkg.onnxscript.torch_lib::aten_amax(self: TRealOrUInt8, dim: T_dim, keepdim: INT = 0) -> (TRealOrUInt8) where TRealOrUInt8=INT64 | INT1",
+   "detail": "convert: ValueError: Required parameter 'dim' is not provided.",
    "examples": []
   },
   {

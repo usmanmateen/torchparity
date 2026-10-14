@@ -8,9 +8,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD Ryzen 7 7800X3D 8-Core Processor",
- "python": "3.12.13",
- "date": "2026-10-12",
+ "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+ "python": "3.12.15",
+ "date": "2026-10-14",
  "results": [
   {
    "op": "abs",
@@ -919,14 +919,6 @@
     {
      "eager": "nan",
      "backend": "0.0"
-    },
-    {
-     "eager": "nan",
-     "backend": "0.0"
-    },
-    {
-     "eager": "nan",
-     "backend": "0.0"
     }
    ]
   },
@@ -937,14 +929,6 @@
    "status": "edge",
    "detail": "values (ordinary inputs alone match)",
    "examples": [
-    {
-     "eager": "nan",
-     "backend": "-inf"
-    },
-    {
-     "eager": "nan",
-     "backend": "-inf"
-    },
     {
      "eager": "nan",
      "backend": "-inf"
@@ -1520,13 +1504,6 @@
      },
      "eager": "-0.0",
      "backend": "0.0"
-    },
-    {
-     "inputs": {
-      "x": "0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
     }
    ]
   },
@@ -1558,13 +1535,6 @@
      },
      "eager": "nan",
      "backend": "-inf"
-    },
-    {
-     "inputs": {
-      "x": "inf"
-     },
-     "eager": "nan",
-     "backend": "inf"
     }
    ]
   },
@@ -2035,13 +2005,6 @@
      },
      "eager": "inf",
      "backend": "nan"
-    },
-    {
-     "inputs": {
-      "x": "-inf"
-     },
-     "eager": "inf",
-     "backend": "nan"
     }
    ]
   },
@@ -2068,20 +2031,6 @@
    "status": "edge",
    "detail": "values",
    "examples": [
-    {
-     "inputs": {
-      "x": "inf"
-     },
-     "eager": "inf",
-     "backend": "nan"
-    },
-    {
-     "inputs": {
-      "x": "inf"
-     },
-     "eager": "inf",
-     "backend": "nan"
-    },
     {
      "inputs": {
       "x": "inf"
@@ -2292,14 +2241,6 @@
     {
      "eager": "nan",
      "backend": "0.0"
-    },
-    {
-     "eager": "nan",
-     "backend": "0.0"
-    },
-    {
-     "eager": "nan",
-     "backend": "0.0"
     }
    ]
   },
@@ -2310,14 +2251,6 @@
    "status": "edge",
    "detail": "values (ordinary inputs alone match)",
    "examples": [
-    {
-     "eager": "nan",
-     "backend": "-inf"
-    },
-    {
-     "eager": "nan",
-     "backend": "-inf"
-    },
     {
      "eager": "nan",
      "backend": "-inf"

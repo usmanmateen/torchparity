@@ -43,7 +43,7 @@ so you can tell whether your model is affected before you ship it.
 | OpenVINO | openvino 2026.4.1 | 366 | 28 | 104 | 25 |
 | Core ML | coremltools 9.0 | 252 | 19 | 25 | 71 |
 | Torch-TensorRT | torch-tensorrt 2.14.0+cu130 | 296 | 8 | 48 | 17 |
-| ExecuTorch | executorch 1.5.1+cpu | 658 | 14 | 33 | 34 |
+| ExecuTorch | executorch 1.5.1+cpu | 658 | 14 | 32 | 35 |
 | torch.compile | torch 2.14.1+cpu | 716 | 3 | 20 | 0 |
 <!-- summary:end -->
 

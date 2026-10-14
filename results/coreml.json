@@ -8,9 +8,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD Ryzen 7 7800X3D 8-Core Processor",
- "python": "3.12.13",
- "date": "2026-10-12",
+ "cpu": "AMD EPYC 7763 64-Core Processor",
+ "python": "3.12.15",
+ "date": "2026-10-14",
  "results": [
   {
    "op": "abs",
@@ -640,10 +640,17 @@
    "examples": [
     {
      "inputs": {
-      "x": "inf"
+      "x": "-0.0"
      },
-     "eager": "nan",
-     "backend": "inf"
+     "eager": "0.0",
+     "backend": "-0.0"
+    },
+    {
+     "inputs": {
+      "x": "-1e+10"
+     },
+     "eager": "0.0",
+     "backend": "-0.0"
     }
    ]
   },
@@ -1472,13 +1479,6 @@
      },
      "eager": "-inf",
      "backend": "10000.0"
-    },
-    {
-     "inputs": {
-      "x": "0.0"
-     },
-     "eager": "inf",
-     "backend": "10000.0"
     }
    ]
   },
@@ -1654,13 +1654,6 @@
      },
      "eager": "inf",
      "backend": "nan"
-    },
-    {
-     "inputs": {
-      "x": "-inf"
-     },
-     "eager": "inf",
-     "backend": "nan"
     }
    ]
   },
@@ -1759,9 +1752,9 @@
     },
     {
      "inputs": {
-      "x": "-inf"
+      "x": "-4.1992"
      },
-     "eager": "nan",
+     "eager": "-0.0",
      "backend": "0.0"
     }
    ]
@@ -2636,7 +2629,7 @@
    "dtype": "i64",
    "expr": "torch.bitwise_and(a, b)",
    "status": "unsupported",
-   "detail": "convert: NotImplementedError: The `bitwise_and` op only supports boolean input, but get [<class 'coremltools.converters.mil.mil.types.type_int.make_int.<locals>.int'>, <class 'coremltools.converters.mil.mil.ty",
+   "detail": "convert: NotImplementedError: The `bitwise_and` op only supports boolean input, but get [<class 'coremltools.converters.mil.mil.types.type_int.make_int.<locals>.int'>, <class 'coremltools.converters.mil.mil...",
    "examples": []
   },
   {
@@ -3188,7 +3181,7 @@
    "dtype": "i32",
    "expr": "torch.bitwise_and(a, b)",
    "status": "unsupported",
-   "detail": "convert: NotImplementedError: The `bitwise_and` op only supports boolean input, but get [<class 'coremltools.converters.mil.mil.types.type_int.make_int.<locals>.int'>, <class 'coremltools.converters.mil.mil.ty",
+   "detail": "convert: NotImplementedError: The `bitwise_and` op only supports boolean input, but get [<class 'coremltools.converters.mil.mil.types.type_int.make_int.<locals>.int'>, <class 'coremltools.converters.mil.mil...",
    "examples": []
   },
   {
