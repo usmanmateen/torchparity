@@ -140,9 +140,10 @@ def ordinary_inputs(case: Case) -> torch.Tensor:
 
 def examples(case: Case, expected: torch.Tensor, actual: torch.Tensor, mask: torch.Tensor,
              limit: int = 3) -> list[dict]:
-    out = []
+    """Up to ``limit`` different examples of the elements in ``mask``."""
+    out: list[dict] = []
     flat_e, flat_a = expected.reshape(-1), actual.reshape(-1)
-    for idx in mask.reshape(-1).nonzero().flatten().tolist()[:limit]:
+    for idx in mask.reshape(-1).nonzero().flatten().tolist():
         item = {}
         if case.elementwise and expected.shape == case.inputs[0].shape:
             names = ("x",) if len(case.inputs) == 1 else ("a", "b")
@@ -150,5 +151,9 @@ def examples(case: Case, expected: torch.Tensor, actual: torch.Tensor, mask: tor
             item["inputs"] = {n: fmt(t.reshape(-1)[idx].item(), t.dtype) for n, t in inputs}
         item["eager"] = fmt(flat_e[idx].item(), expected.dtype)
         item["backend"] = fmt(flat_a[idx].item(), actual.dtype)
-        out.append(item)
+        # Cases repeat some values, such as inf; show each difference once.
+        if item not in out:
+            out.append(item)
+            if len(out) == limit:
+                break
     return out
