@@ -62,6 +62,15 @@ pr = "https://github.com/pytorch/TensorRT/pull/4850"
 found_here = true
 
 [[issue]]
+backend = "tensorrt"
+ops = ["fmod"]
+dtypes = ["f32"]
+title = "torch.fmod returns a tiny value with the wrong sign when the float quotient rounds up"
+issue = "https://github.com/pytorch/TensorRT/issues/4860"
+pr = "https://github.com/pytorch/TensorRT/pull/4861"
+found_here = true
+
+[[issue]]
 backend = "executorch"
 ops = ["remainder", "remainder_scalar"]
 title = "Portable remainder: wrong sign for integers, float64 rounded to float"
