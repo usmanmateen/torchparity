@@ -44,6 +44,7 @@ jobs:
     if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     permissions:
+      actions: write
       contents: write
       pull-requests: write
     steps:
@@ -61,8 +62,16 @@ jobs:
           pip install --extra-index-url https://download.pytorch.org/whl/cpu -e .
           torchparity report results/*.json -o RESULTS.md --readme README.md
       - uses: peter-evans/create-pull-request@v8
+        id: pr
         with:
           branch: weekly-results
           commit-message: Update results
           title: Update results
           body: Weekly run of every CPU backend on its latest release.
+      # A pull request opened with GITHUB_TOKEN doesn't start other workflows (only workflow_dispatch
+      # does), so start CI on the branch to give the pull request the checks main requires.
+      - name: Run CI on the pull request
+        if: ${{ steps.pr.outputs.pull-request-operation == 'created' || steps.pr.outputs.pull-request-operation == 'updated' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --repo ${{ github.repository }} --ref weekly-results
