@@ -131,6 +131,17 @@ def test_error_message_skips_location_headers():
         assert _first_line(outer) == "ValueError: specific"
 
 
+def test_long_error_message_keeps_whole_sentences():
+    from torchparity.runner import _first_line
+
+    signature = "Signature: f(" + ", ".join(f"x{i}: INT" for i in range(40)) + ")"
+    exc = ValueError(f"Required parameter 'dim' is not provided. {signature}")
+    assert _first_line(exc) == "ValueError: Required parameter 'dim' is not provided."
+    text = _first_line(RuntimeError("x" * 300))
+    assert len(text) == 200 and text.endswith("...")
+    assert _first_line(RuntimeError("short. message")) == "RuntimeError: short. message"
+
+
 def test_run_isolated_matches_in_process():
     from torchparity.runner import run_isolated
 
