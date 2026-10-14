@@ -19,8 +19,12 @@ def test_render_matrix_and_links():
             result("trunc", "f32", "unsupported", detail="convert: AssertionError"),
         ]),
     ]
+    runs[0]["cpu"], runs[0]["platform"] = "Some CPU", "Linux x86_64"
+    runs[1]["gpu"] = "Some GPU"
     known = [{"backend": "tensorrt", "ops": ["div"], "dtypes": ["i64"], "issue": "https://github.com/o/r/issues/7"}]
     text = render(runs, known)
+    assert "| ONNX Runtime | torch 2 | m | Some CPU, Linux x86_64 | 2 | 0 | 0 | 0 |" in text
+    assert "| Torch-TensorRT | torch 2 | m | Some GPU | 1 | 1 | 1 | 1 |" in text
     assert "| `div` | `torch.div(a, b)` | ✅ | ❌ i64 [#7](https://github.com/o/r/issues/7) |" in text
     assert "| `sign` | `torch.sign(x)` |  | ⚠️ f32 |" in text
     assert "| `trunc` | `torch.trunc(x)` |  | 🚫 f32 |" in text

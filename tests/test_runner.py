@@ -150,6 +150,14 @@ def test_a_crash_fails_one_case(monkeypatch):
     assert [s for op, s, _ in statuses if op != "sign"] == ["ok", "ok"]
 
 
+def test_metadata_records_the_machine():
+    from torchparity.runner import metadata
+
+    data = metadata(Eager())
+    assert isinstance(data["cpu"], str) and data["platform"]
+    assert "gpu" not in data
+
+
 def test_select_cases():
     from torchparity.runner import select_cases
 
