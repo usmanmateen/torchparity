@@ -127,14 +127,15 @@ def render(runs: list[dict], known: list[dict]) -> str:
         "compared with eager PyTorch on the same inputs. Differences from eager PyTorch are not always bugs: "
         "some are documented limitations or deliberate choices.",
         "",
-        "| Backend | Versions | How it runs | ✅ | ❌ | ⚠️ | 🚫 |",
-        "|---|---|---|---|---|---|---|",
+        "| Backend | Versions | How it runs | Machine | ✅ | ❌ | ⚠️ | 🚫 |",
+        "|---|---|---|---|---|---|---|---|",
     ]
     for run in runs:
         counts = Counter(r["status"] for r in run["results"])
         versions = ", ".join(f"{k} {v}" for k, v in run["versions"].items())
-        lines.append(f"| {run['label']} | {versions} | {run['mode']} | {counts['ok']} | {counts['wrong']} | "
-                     f"{counts['edge']} | {counts['unsupported']} |")
+        machine = ", ".join(run[k] for k in ("gpu", "cpu", "platform") if run.get(k))
+        lines.append(f"| {run['label']} | {versions} | {run['mode']} | {machine} | {counts['ok']} | "
+                     f"{counts['wrong']} | {counts['edge']} | {counts['unsupported']} |")
     lines += ["", LEGEND, "", "## By operator", ""]
     lines.append("| Op | Expression | " + " | ".join(run["label"] for run in runs) + " |")
     lines.append("|---|---|" + "---|" * len(runs))

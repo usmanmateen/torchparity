@@ -199,17 +199,32 @@ def run_isolated(name: str, cases: list[Case],
     return results
 
 
+def _cpu() -> str:
+    """The CPU model. Some backends pick kernels by instruction set, so results can differ between machines."""
+    try:
+        for line in Path("/proc/cpuinfo").read_text(encoding="utf-8").splitlines():
+            if line.startswith("model name"):
+                return line.split(":", 1)[1].strip()
+    except OSError:
+        pass
+    return platform.processor()
+
+
 def metadata(backend: Backend) -> dict:
-    return {
+    data = {
         "backend": backend.name,
         "label": backend.label,
         "mode": backend.mode,
         "versions": backend.versions(),
         "torchparity": __version__,
         "platform": f"{platform.system()} {platform.machine()}",
-        "python": platform.python_version(),
-        "date": datetime.date.today().isoformat(),
+        "cpu": _cpu(),
     }
+    if backend.device.startswith("cuda") and torch.cuda.is_available():
+        data["gpu"] = torch.cuda.get_device_name(torch.device(backend.device))
+    data["python"] = platform.python_version()
+    data["date"] = datetime.date.today().isoformat()
+    return data
 
 
 def save(path: str | Path, backend: Backend, results: list[Result]) -> None:
