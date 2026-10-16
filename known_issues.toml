@@ -46,6 +46,14 @@ found_here = true
 
 [[issue]]
 backend = "openvino"
+ops = ["fmod", "remainder"]
+dtypes = ["f32"]
+title = "CPU Mod and FloorMod return 0 instead of nearly the divisor for float32 multiples"
+issue = "https://github.com/openvinotoolkit/openvino/issues/38929"
+found_here = true
+
+[[issue]]
+backend = "openvino"
 ops = ["div_floor", "floor_divide", "div_scalar_floor", "floor_divide_scalar"]
 dtypes = ["i64", "i32", "i8", "u8"]
 title = "Integer floor division rounds toward zero for negative results"
