@@ -10,7 +10,7 @@
  "platform": "Linux x86_64",
  "cpu": "AMD EPYC 7763 64-Core Processor",
  "python": "3.12.15",
- "date": "2026-10-14",
+ "date": "2026-10-19",
  "results": [
   {
    "op": "abs",
@@ -4400,8 +4400,8 @@
    "op": "atan2",
    "dtype": "i64",
    "expr": "torch.atan2(a, b)",
-   "status": "unsupported",
-   "detail": "crashed (signal 11)",
+   "status": "ok",
+   "detail": "",
    "examples": []
   },
   {
@@ -5064,24 +5064,24 @@
    "op": "lt",
    "dtype": "i32",
    "expr": "torch.lt(a, b)",
-   "status": "ok",
-   "detail": "",
+   "status": "unsupported",
+   "detail": "crashed (signal 11)",
    "examples": []
   },
   {
    "op": "le",
    "dtype": "i32",
    "expr": "torch.le(a, b)",
-   "status": "ok",
-   "detail": "",
+   "status": "unsupported",
+   "detail": "crashed (signal 11)",
    "examples": []
   },
   {
    "op": "gt",
    "dtype": "i32",
    "expr": "torch.gt(a, b)",
-   "status": "ok",
-   "detail": "",
+   "status": "unsupported",
+   "detail": "crashed (signal 11)",
    "examples": []
   },
   {
