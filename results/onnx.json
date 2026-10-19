@@ -10,9 +10,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD EPYC 7763 64-Core Processor",
+ "cpu": "Intel(R) Xeon(R) 6973P-C",
  "python": "3.12.15",
- "date": "2026-10-14",
+ "date": "2026-10-19",
  "results": [
   {
    "op": "abs",
@@ -599,17 +599,10 @@
    "examples": [
     {
      "inputs": {
-      "x": "-0.0"
+      "x": "inf"
      },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "x": "-1e+10"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
+     "eager": "nan",
+     "backend": "inf"
     }
    ]
   },
@@ -2750,9 +2743,17 @@
    "op": "gelu",
    "dtype": "f16",
    "expr": "F.gelu(x)",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
   },
   {
    "op": "gelu_tanh",
