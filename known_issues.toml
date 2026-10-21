@@ -24,7 +24,6 @@ ops = ["floor_divide", "div_floor", "floor_divide_scalar", "div_scalar_floor"]
 dtypes = ["f32", "f64", "f16", "f32+i64"]
 title = "Float floor division is one too large when the quotient rounds up to a whole number"
 issue = "https://github.com/microsoft/onnxscript/issues/3115"
-pr = "https://github.com/microsoft/onnxscript/pull/3112"
 found_here = true
 
 [[issue]]
