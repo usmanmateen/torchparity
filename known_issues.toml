@@ -19,6 +19,24 @@ pr = "https://github.com/microsoft/onnxscript/pull/3089"
 found_here = true
 
 [[issue]]
+backend = "onnx"
+ops = ["floor_divide", "div_floor", "floor_divide_scalar", "div_scalar_floor"]
+dtypes = ["f32", "f64", "f16", "f32+i64"]
+title = "Float floor division is one too large when the quotient rounds up to a whole number"
+issue = "https://github.com/microsoft/onnxscript/issues/3115"
+pr = "https://github.com/microsoft/onnxscript/pull/3112"
+found_here = true
+
+[[issue]]
+backend = "onnx"
+ops = ["remainder", "remainder_scalar"]
+dtypes = ["f32", "f64", "f16", "f32+i64"]
+title = "Float remainder is off by the divisor when the quotient rounds up, and nan for an infinite divisor"
+issue = "https://github.com/microsoft/onnxscript/issues/3116"
+pr = "https://github.com/microsoft/onnxscript/pull/3113"
+found_here = true
+
+[[issue]]
 backend = "openvino"
 ops = ["div_trunc", "div_scalar_trunc", "trunc"]
 title = "torch.div(rounding_mode=\"trunc\") overflows through int32; aten::trunc is not supported"
