@@ -7,9 +7,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+ "cpu": "AMD EPYC 9V45 96-Core Processor",
  "python": "3.12.15",
- "date": "2026-10-14",
+ "date": "2026-10-26",
  "results": [
   {
    "op": "abs",
