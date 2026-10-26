@@ -8,9 +8,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
+ "cpu": "AMD EPYC 7763 64-Core Processor",
  "python": "3.12.15",
- "date": "2026-10-14",
+ "date": "2026-10-26",
  "results": [
   {
    "op": "abs",
@@ -325,17 +325,9 @@
    "op": "where_scalar",
    "dtype": "f32",
    "expr": "torch.where(x > 0, x, 0)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "nan"
-     },
-     "eager": "0.0",
-     "backend": "nan"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "floor",
@@ -1251,35 +1243,17 @@
    "op": "gt",
    "dtype": "f32",
    "expr": "torch.gt(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "nan",
-      "b": "1.0"
-     },
-     "eager": "False",
-     "backend": "True"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "ge",
    "dtype": "f32",
    "expr": "torch.ge(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "nan",
-      "b": "1.0"
-     },
-     "eager": "False",
-     "backend": "True"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "logical_and",
@@ -1327,18 +1301,9 @@
    "op": "where",
    "dtype": "f32",
    "expr": "torch.where(a > b, a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "nan",
-      "b": "1.0"
-     },
-     "eager": "1.0",
-     "backend": "nan"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "clamp_tensor",
@@ -1644,17 +1609,9 @@
    "op": "where_scalar",
    "dtype": "f16",
    "expr": "torch.where(x > 0, x, 0)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "nan"
-     },
-     "eager": "0.0",
-     "backend": "nan"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "floor",
@@ -2033,10 +1990,10 @@
    "examples": [
     {
      "inputs": {
-      "x": "inf"
+      "x": "-0.0"
      },
-     "eager": "inf",
-     "backend": "nan"
+     "eager": "-0.0",
+     "backend": "0.0"
     }
    ]
   },
@@ -2573,35 +2530,17 @@
    "op": "gt",
    "dtype": "f16",
    "expr": "torch.gt(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "nan",
-      "b": "1.0"
-     },
-     "eager": "False",
-     "backend": "True"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "ge",
    "dtype": "f16",
    "expr": "torch.ge(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "nan",
-      "b": "1.0"
-     },
-     "eager": "False",
-     "backend": "True"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "logical_and",
@@ -2649,18 +2588,9 @@
    "op": "where",
    "dtype": "f16",
    "expr": "torch.where(a > b, a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "nan",
-      "b": "1.0"
-     },
-     "eager": "1.0",
-     "backend": "nan"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "clamp_tensor",
@@ -4805,7 +4735,7 @@
       "x": "255"
      },
      "eager": "1",
-     "backend": "255"
+     "backend": "0"
     },
     {
      "inputs": {
@@ -4819,7 +4749,7 @@
       "x": "249"
      },
      "eager": "7",
-     "backend": "255"
+     "backend": "0"
     }
    ]
   },
@@ -4867,21 +4797,21 @@
       "x": "255"
      },
      "eager": "1",
-     "backend": "255"
+     "backend": "0"
     },
     {
      "inputs": {
       "x": "249"
      },
      "eager": "49",
-     "backend": "255"
+     "backend": "0"
     },
     {
      "inputs": {
       "x": "250"
      },
      "eager": "36",
-     "backend": "255"
+     "backend": "0"
     }
    ]
   },
@@ -4897,21 +4827,21 @@
       "x": "255"
      },
      "eager": "1",
-     "backend": "255"
+     "backend": "0"
     },
     {
      "inputs": {
       "x": "249"
      },
      "eager": "49",
-     "backend": "255"
+     "backend": "0"
     },
     {
      "inputs": {
       "x": "250"
      },
      "eager": "36",
-     "backend": "255"
+     "backend": "0"
     }
    ]
   },
@@ -4950,7 +4880,7 @@
       "x": "255"
      },
      "eager": "2",
-     "backend": "255"
+     "backend": "0"
     },
     {
      "inputs": {
@@ -4964,7 +4894,7 @@
       "x": "249"
      },
      "eager": "14",
-     "backend": "255"
+     "backend": "0"
     }
    ]
   },
@@ -5425,6 +5355,14 @@
    "examples": [
     {
      "inputs": {
+      "a": "255",
+      "b": "3"
+     },
+     "eager": "255",
+     "backend": "0"
+    },
+    {
+     "inputs": {
       "a": "7",
       "b": "3"
      },
@@ -5437,14 +5375,6 @@
       "b": "3"
      },
      "eager": "169",
-     "backend": "255"
-    },
-    {
-     "inputs": {
-      "a": "127",
-      "b": "254"
-     },
-     "eager": "1",
      "backend": "0"
     }
    ]

@@ -10,9 +10,9 @@
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD EPYC 7763 64-Core Processor",
+ "cpu": "AMD EPYC 9V74 80-Core Processor",
  "python": "3.12.15",
- "date": "2026-10-14",
+ "date": "2026-10-26",
  "results": [
   {
    "op": "abs",
