@@ -3,14 +3,14 @@
  "label": "ExecuTorch",
  "mode": "to_edge(torch.export.export(...)).to_executorch(), default CPU kernels",
  "versions": {
-  "torch": "2.14.1+cpu",
-  "executorch": "1.5.1+cpu"
+  "torch": "2.15.0+cpu",
+  "executorch": "1.6.0+cpu"
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD EPYC 7763 64-Core Processor",
- "python": "3.12.15",
- "date": "2026-10-14",
+ "cpu": "AMD EPYC 9V74 80-Core Processor",
+ "python": "3.12.16",
+ "date": "2026-11-09",
  "results": [
   {
    "op": "abs",
@@ -128,17 +128,9 @@
    "op": "div_scalar_floor",
    "dtype": "f32",
    "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_scalar_trunc",
@@ -152,17 +144,9 @@
    "op": "floor_divide_scalar",
    "dtype": "f32",
    "expr": "x // 3",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod_scalar",
@@ -537,17 +521,10 @@
    "examples": [
     {
      "inputs": {
-      "x": "-0.0"
+      "x": "inf"
      },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "x": "-1e+10"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
+     "eager": "nan",
+     "backend": "inf"
     }
    ]
   },
@@ -771,34 +748,9 @@
    "op": "div_floor",
    "dtype": "f32",
    "expr": "torch.div(a, b, rounding_mode=\"floor\")",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "-0.0",
-      "b": "-3.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-0.5",
-      "b": "-2.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-1.0",
-      "b": "-inf"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_trunc",
@@ -812,34 +764,9 @@
    "op": "floor_divide",
    "dtype": "f32",
    "expr": "torch.floor_divide(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "-0.0",
-      "b": "-3.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-0.5",
-      "b": "-2.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-1.0",
-      "b": "-inf"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod",
@@ -1117,17 +1044,9 @@
    "op": "div_scalar_floor",
    "dtype": "f64",
    "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_scalar_trunc",
@@ -1141,17 +1060,9 @@
    "op": "floor_divide_scalar",
    "dtype": "f64",
    "expr": "x // 3",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod_scalar",
@@ -1706,8 +1617,8 @@
    "op": "log_softmax",
    "dtype": "f64",
    "expr": "x.log_softmax(0)",
-   "status": "unsupported",
-   "detail": "run: RuntimeError: method->execute() failed with error 0x12",
+   "status": "ok",
+   "detail": "",
    "examples": []
   },
   {
@@ -1762,34 +1673,9 @@
    "op": "div_floor",
    "dtype": "f64",
    "expr": "torch.div(a, b, rounding_mode=\"floor\")",
-   "status": "wrong",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "4.2000000000000002",
-      "b": "1.3999999999999999"
-     },
-     "eager": "3.0",
-     "backend": "2.9999999999999996"
-    },
-    {
-     "inputs": {
-      "a": "0.69999999999999996",
-      "b": "0.10000000000000001"
-     },
-     "eager": "6.0",
-     "backend": "6.0000000000000009"
-    },
-    {
-     "inputs": {
-      "a": "-4.2000000000000002",
-      "b": "1.3999999999999999"
-     },
-     "eager": "-4.0",
-     "backend": "-3.9999999999999996"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_trunc",
@@ -1803,34 +1689,9 @@
    "op": "floor_divide",
    "dtype": "f64",
    "expr": "torch.floor_divide(a, b)",
-   "status": "wrong",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "4.2000000000000002",
-      "b": "1.3999999999999999"
-     },
-     "eager": "3.0",
-     "backend": "2.9999999999999996"
-    },
-    {
-     "inputs": {
-      "a": "0.69999999999999996",
-      "b": "0.10000000000000001"
-     },
-     "eager": "6.0",
-     "backend": "6.0000000000000009"
-    },
-    {
-     "inputs": {
-      "a": "-4.2000000000000002",
-      "b": "1.3999999999999999"
-     },
-     "eager": "-4.0",
-     "backend": "-3.9999999999999996"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod",
@@ -2125,17 +1986,9 @@
    "op": "div_scalar_floor",
    "dtype": "f16",
    "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_scalar_trunc",
@@ -2149,17 +2002,9 @@
    "op": "floor_divide_scalar",
    "dtype": "f16",
    "expr": "x // 3",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod_scalar",
@@ -2733,34 +2578,9 @@
    "op": "div_floor",
    "dtype": "f16",
    "expr": "torch.div(a, b, rounding_mode=\"floor\")",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "-0.0",
-      "b": "-3.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-0.5",
-      "b": "-2.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-1.0",
-      "b": "-inf"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_trunc",
@@ -2774,34 +2594,9 @@
    "op": "floor_divide",
    "dtype": "f16",
    "expr": "torch.floor_divide(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "-0.0",
-      "b": "-3.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-0.5",
-      "b": "-2.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-1.0",
-      "b": "-inf"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod",
@@ -3071,17 +2866,9 @@
    "op": "div_scalar_floor",
    "dtype": "bf16",
    "expr": "torch.div(x, 3, rounding_mode=\"floor\")",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_scalar_trunc",
@@ -3095,17 +2882,9 @@
    "op": "floor_divide_scalar",
    "dtype": "bf16",
    "expr": "x // 3",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "-0.0"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod_scalar",
@@ -3470,9 +3249,17 @@
    "op": "gelu",
    "dtype": "bf16",
    "expr": "F.gelu(x)",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
   },
   {
    "op": "gelu_tanh",
@@ -3694,34 +3481,9 @@
    "op": "div_floor",
    "dtype": "bf16",
    "expr": "torch.div(a, b, rounding_mode=\"floor\")",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "-0.0",
-      "b": "-3.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-0.5",
-      "b": "-2.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-1.0",
-      "b": "-inf"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "div_trunc",
@@ -3760,34 +3522,9 @@
    "op": "floor_divide",
    "dtype": "bf16",
    "expr": "torch.floor_divide(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "-0.0",
-      "b": "-3.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-0.5",
-      "b": "-2.0"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "a": "-1.0",
-      "b": "-inf"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "fmod",
@@ -4400,8 +4137,8 @@
    "op": "atan2",
    "dtype": "i64",
    "expr": "torch.atan2(a, b)",
-   "status": "unsupported",
-   "detail": "crashed (signal 11)",
+   "status": "ok",
+   "detail": "",
    "examples": []
   },
   {
@@ -5800,7 +5537,7 @@
    "dtype": "u8",
    "expr": "torch.clamp(x, -2, 2)",
    "status": "unsupported",
-   "detail": "run: RuntimeError: method->execute() failed with error 0x12",
+   "detail": "run: RuntimeError: method->execute() failed with error 0x12: minimum value out of bounds; Check failed (check_bounds(ctx, min_opt.value(), min_type, out_type, \"minimum\")): ; KernelCall failed at instruc...",
    "examples": []
   },
   {
@@ -6384,26 +6121,9 @@
    "op": "floor_divide",
    "dtype": "f32+i64",
    "expr": "torch.floor_divide(a, b)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "a": "-0.0",
-      "b": "3"
-     },
-     "eager": "-0.0",
-     "backend": "0.0"
-    },
-    {
-     "inputs": {
-      "a": "-1.5",
-      "b": "-3"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "maximum",
