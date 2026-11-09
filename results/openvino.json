@@ -3,14 +3,14 @@
  "label": "OpenVINO",
  "mode": "ov.convert_model(example_input=...), CPU, f32 inference precision",
  "versions": {
-  "torch": "2.14.1+cpu",
+  "torch": "2.15.0+cpu",
   "openvino": "2026.4.1"
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "Intel(R) Xeon(R) Platinum 8370C CPU @ 2.80GHz",
- "python": "3.12.15",
- "date": "2026-10-14",
+ "cpu": "Intel(R) Xeon(R) 6973P-C",
+ "python": "3.12.16",
+ "date": "2026-11-09",
  "results": [
   {
    "op": "abs",
@@ -2028,17 +2028,9 @@
    "op": "gelu",
    "dtype": "f16",
    "expr": "F.gelu(x)",
-   "status": "edge",
-   "detail": "values",
-   "examples": [
-    {
-     "inputs": {
-      "x": "inf"
-     },
-     "eager": "inf",
-     "backend": "nan"
-    }
-   ]
+   "status": "ok",
+   "detail": "",
+   "examples": []
   },
   {
    "op": "gelu_tanh",
@@ -4843,9 +4835,24 @@
    "op": "clamp",
    "dtype": "u8",
    "expr": "torch.clamp(x, -2, 2)",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0"
+     },
+     "eager": "0",
+     "backend": "2"
+    },
+    {
+     "inputs": {
+      "x": "1"
+     },
+     "eager": "1",
+     "backend": "2"
+    }
+   ]
   },
   {
    "op": "clamp_min",
