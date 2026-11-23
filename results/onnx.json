@@ -3,16 +3,16 @@
  "label": "ONNX Runtime",
  "mode": "torch.onnx.export(dynamo=True), CPUExecutionProvider",
  "versions": {
-  "torch": "2.14.1+cpu",
+  "torch": "2.15.0+cpu",
   "onnxscript": "0.7.2",
   "onnx": "1.23.2",
-  "onnxruntime": "1.31.0"
+  "onnxruntime": "1.32.0"
  },
  "torchparity": "0.1.0",
  "platform": "Linux x86_64",
- "cpu": "AMD EPYC 7763 64-Core Processor",
- "python": "3.12.15",
- "date": "2026-10-14",
+ "cpu": "Intel(R) Xeon(R) 6975P-C",
+ "python": "3.12.16",
+ "date": "2026-11-23",
  "results": [
   {
    "op": "abs",
@@ -371,9 +371,14 @@
    "op": "argmax",
    "dtype": "f32",
    "expr": "x.argmax()",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "16",
+     "backend": "14"
+    }
+   ]
   },
   {
    "op": "rsqrt",
@@ -599,17 +604,10 @@
    "examples": [
     {
      "inputs": {
-      "x": "-0.0"
+      "x": "inf"
      },
-     "eager": "0.0",
-     "backend": "-0.0"
-    },
-    {
-     "inputs": {
-      "x": "-1e+10"
-     },
-     "eager": "0.0",
-     "backend": "-0.0"
+     "eager": "nan",
+     "backend": "inf"
     }
    ]
   },
@@ -766,9 +764,14 @@
    "op": "argmin",
    "dtype": "f32",
    "expr": "x.argmin()",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "16",
+     "backend": "15"
+    }
+   ]
   },
   {
    "op": "softmax",
@@ -1449,9 +1452,14 @@
    "op": "argmax",
    "dtype": "f64",
    "expr": "x.argmax()",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "16",
+     "backend": "14"
+    }
+   ]
   },
   {
    "op": "rsqrt",
@@ -1895,9 +1903,14 @@
    "op": "argmin",
    "dtype": "f64",
    "expr": "x.argmin()",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "16",
+     "backend": "15"
+    }
+   ]
   },
   {
    "op": "softmax",
@@ -2542,9 +2555,14 @@
    "op": "argmax",
    "dtype": "f16",
    "expr": "x.argmax()",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "16",
+     "backend": "11"
+    }
+   ]
   },
   {
    "op": "rsqrt",
@@ -2750,9 +2768,17 @@
    "op": "gelu",
    "dtype": "f16",
    "expr": "F.gelu(x)",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "inf"
+     },
+     "eager": "nan",
+     "backend": "inf"
+    }
+   ]
   },
   {
    "op": "gelu_tanh",
@@ -2907,9 +2933,14 @@
    "op": "argmin",
    "dtype": "f16",
    "expr": "x.argmin()",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "edge",
+   "detail": "values (ordinary inputs alone match)",
+   "examples": [
+    {
+     "eager": "16",
+     "backend": "12"
+    }
+   ]
   },
   {
    "op": "softmax",
@@ -4961,9 +4992,24 @@
    "op": "clamp",
    "dtype": "u8",
    "expr": "torch.clamp(x, -2, 2)",
-   "status": "ok",
-   "detail": "",
-   "examples": []
+   "status": "wrong",
+   "detail": "values",
+   "examples": [
+    {
+     "inputs": {
+      "x": "0"
+     },
+     "eager": "0",
+     "backend": "2"
+    },
+    {
+     "inputs": {
+      "x": "1"
+     },
+     "eager": "1",
+     "backend": "2"
+    }
+   ]
   },
   {
    "op": "clamp_min",
